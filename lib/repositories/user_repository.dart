@@ -13,8 +13,9 @@ class UserRepository {
   String get endpointUrl => '/users';
 
   Future<UserProfile> getUserProfileById(int id) async {
-    final response = await httpClient.get<DynamicMap>('$endpointUrl/$id');
+    final response = await httpClient.get('$endpointUrl/$id');
+    final responseData = response.data as DynamicMap;
 
-    return UserProfile.fromJson(response.data!);
+    return UserProfile.fromJson(responseData);
   }
 }

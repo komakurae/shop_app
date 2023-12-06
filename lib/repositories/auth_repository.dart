@@ -1,6 +1,6 @@
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shop_app/models/index.dart';
+import 'package:shop_app/models/general_models.dart';
 
 import 'package:shop_app/services/http/http_client.dart';
 
@@ -16,14 +16,14 @@ class AuthRepository {
   String get endpointUrl => '/auth';
 
   Future<void> signIn(String userName, String password) async {
-    final response = await httpClient.post<DynamicMap>(
+    final response = await httpClient.post(
       '$endpointUrl/login',
       data: <String, String>{
         'username': userName,
         'password': password,
       },
     );
-    final responseData = response.data!;
+    final responseData = response.data as DynamicMap;
     final token = responseData['token'];
 
     return httpClient.setToken(token);
