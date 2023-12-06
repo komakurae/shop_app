@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -35,6 +36,19 @@ class AppDrawer extends StatelessWidget {
                       backgroundImage: AssetImage(Assets.images.logoShort.path),
                     ),
                   ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: BlocBuilder<AuthBloc, AuthState>(
+                    builder: (context, state) {
+                      final userFullName = state.userProfile.name;
+
+                      return Text(
+                        '${userFullName.firstname} ${userFullName.lastname}',
+                        style: Theme.of(context).textTheme.labelLarge,
+                      );
+                    },
+                  ),
                 ),
                 const Divider(height: 20),
                 Padding(
