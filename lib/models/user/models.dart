@@ -3,15 +3,9 @@
 //     final userProfile = userProfileFromJson(jsonString);
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'models.freezed.dart';
 part 'models.g.dart';
-
-UserProfile userProfileFromJson(String str) =>
-    UserProfile.fromJson(json.decode(str));
-
-String userProfileToJson(UserProfile data) => json.encode(data.toJson());
 
 @freezed
 class UserProfile with _$UserProfile {
