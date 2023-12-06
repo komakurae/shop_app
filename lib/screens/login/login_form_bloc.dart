@@ -18,12 +18,16 @@ class LoginFormBloc extends FormBloc<String, String> {
     required this.authBloc,
     required this.repository,
   }) : super(customSubmit: false) {
+    // hardcoded value for username and password
+    // FOR NOW !!!
     username = TextFieldBloc(
+      initialValue: 'mor_2314',
       required: true,
       rules: {ValidationType.onBlur},
     );
 
     password = TextFieldBloc(
+      initialValue: '83r5^_',
       required: true,
       customValidators: {FieldBlocValidators.passwordMin6Chars},
       rules: {ValidationType.onBlur},
@@ -37,8 +41,16 @@ class LoginFormBloc extends FormBloc<String, String> {
 
   @override
   FutureOr<void> onSubmit() async {
-    await repository.signIn(username.toString(), password.toString());
+    try {
+      await repository.signIn(
+        username.toString(),
+        password.toString(),
+      );
+      emitSuccess('Success');
+    } catch (e, stackTrace) {
+      addError(e, stackTrace);
 
-    emitSuccess('Success');
+      emitFailure('Something went wrong');
+    }
   }
 }

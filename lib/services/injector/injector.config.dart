@@ -4,11 +4,12 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_lambdas
-// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: type=lint
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:get_it/get_it.dart' as _i1;
+import 'package:injectable/injectable.dart' as _i2;
 import 'package:shop_app/blocs/auth/auth_bloc.dart' as _i6;
 import 'package:shop_app/blocs/index.dart' as _i9;
 import 'package:shop_app/repositories/auth_repository.dart' as _i5;
@@ -18,12 +19,9 @@ import 'package:shop_app/repositories/posts_repository.dart' as _i11;
 import 'package:shop_app/repositories/user_repository.dart' as _i4;
 import 'package:shop_app/screens/home/messages/chats/bloc/chats_bloc.dart'
     as _i12;
-import 'package:shop_app/screens/home/messages/posts/posts_bloc.dart'
-    as _i13;
+import 'package:shop_app/screens/home/messages/posts/posts_bloc.dart' as _i13;
 import 'package:shop_app/screens/login/login_form_bloc.dart' as _i8;
 import 'package:shop_app/services/http/http_client.dart' as _i3;
-import 'package:get_it/get_it.dart' as _i1;
-import 'package:injectable/injectable.dart' as _i2;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of auth-scope dependencies inside of GetIt
