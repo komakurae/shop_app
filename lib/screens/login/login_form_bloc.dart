@@ -18,12 +18,16 @@ class LoginFormBloc extends FormBloc<String, String> {
     required this.authBloc,
     required this.repository,
   }) : super(customSubmit: false) {
+    // hardcoded value for username and password
+    // FOR NOW !!!
     username = TextFieldBloc(
+      initialValue: 'mor_2314',
       required: true,
       rules: {ValidationType.onBlur},
     );
 
     password = TextFieldBloc(
+      initialValue: '83r5^_',
       required: true,
       customValidators: {FieldBlocValidators.passwordMin6Chars},
       rules: {ValidationType.onBlur},
