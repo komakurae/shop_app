@@ -1,18 +1,14 @@
 {
     "screenText": "Screen",
-
-    "dashboard" : "Dashboard",
-    "dashboardScreenTitle": "@:dashboard @:screenText",
-
+    "products": "Products",
+    "productsScreenTitle": "@:products @:screenText",
     "messages": "Messages",
     "chats": "Chats",
-    "chatsScreenTitle" : "@:chats @:screenText",
+    "chatsScreenTitle": "@:chats @:screenText",
     "posts": "Posts",
-    "postsScreenTitle" : "@:posts @:screenText",
-
-    "settings" : "Settings",
-    "settingsScreenTitle" : "@:settings @:screenText",
-
+    "postsScreenTitle": "@:posts @:screenText",
+    "settings": "Settings",
+    "settingsScreenTitle": "@:settings @:screenText",
     "changePassword": "Change Password",
     "languageName": "English",
     "signOut": "Sign Out"

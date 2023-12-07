@@ -1,8 +1,8 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 abstract class  LocaleKeys {
   static const screenText = 'screenText';
-  static const dashboard = 'dashboard';
-  static const dashboardScreenTitle = 'dashboardScreenTitle';
+  static const products = 'products';
+  static const productsScreenTitle = 'productsScreenTitle';
   static const messages = 'messages';
   static const chats = 'chats';
   static const chatsScreenTitle = 'chatsScreenTitle';
