@@ -47,10 +47,6 @@ class ProductsBloc extends NetworkSearchableListBloc<Product, ProductsState> {
       return state.copyWith(
         visibleData: searchedData,
       );
-    } else if (state.query == null || state.query!.isEmpty) {
-      return state.copyWith(
-        visibleData: visibleData,
-      );
     }
 
     return super.onStateChanged(reason, state);
