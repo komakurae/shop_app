@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
     return AutoTabsScaffold(
       endDrawer: const AppDrawer(),
       routes: const [
-        DashboardRoute(),
+        ProductsRoute(),
         MessagesRoute(),
         SettingsRoute(),
       ],
@@ -36,8 +36,8 @@ class HomeScreen extends StatelessWidget {
             onTap: tabsRouter.setActiveIndex,
             items: [
               BottomNavigationBarItem(
-                icon: const Icon(Icons.dashboard),
-                label: LocaleKeys.dashboard.tr(),
+                icon: const Icon(Icons.storefront),
+                label: LocaleKeys.products.tr(),
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.message),

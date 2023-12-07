@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shop_app/blocs/index.dart';
+import 'package:shop_app/screens/home/products/products_bloc.dart';
 import 'package:shop_app/services/index.dart';
 
 class HomeStateWrapper extends StatelessWidget {
@@ -19,6 +20,9 @@ class HomeStateWrapper extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<PostsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<ProductsBloc>(),
         ),
       ],
       child: child,
