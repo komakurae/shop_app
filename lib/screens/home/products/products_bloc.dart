@@ -1,11 +1,12 @@
 import 'package:injectable/injectable.dart';
+import 'package:stx_bloc_base/stx_bloc_base.dart';
+
 import 'package:shop_app/models/product/models.dart';
 import 'package:shop_app/repositories/products_repository.dart';
-import 'package:stx_bloc_base/stx_bloc_base.dart';
 
 typedef ProductsState = NetworkSearchableState<List<Product>>;
 
-@LazySingleton()
+@lazySingleton
 class ProductsBloc extends NetworkSearchableListBloc<Product, ProductsState> {
   ProductsBloc({
     required this.repository,
@@ -25,7 +26,7 @@ class ProductsBloc extends NetworkSearchableListBloc<Product, ProductsState> {
 
   @override
   Future<List<Product>> onLoadAsync() async {
-    final products = await repository.getAllProducts();
+    final products = repository.getAllProducts();
 
     return products;
   }
@@ -35,20 +36,16 @@ class ProductsBloc extends NetworkSearchableListBloc<Product, ProductsState> {
     DataChangeReason reason,
     ProductsState state,
   ) {
-    final visibleData = state.data;
+    var visibleData = state.data;
 
     if (state.query != null && state.query!.isNotEmpty) {
-      final searchedData = visibleData
+      visibleData = visibleData
           .where(
             (product) => RegExp(state.query!).hasMatch(product.title),
           )
           .toList();
-
-      return state.copyWith(
-        visibleData: searchedData,
-      );
     }
 
-    return super.onStateChanged(reason, state);
+    return state.copyWith(visibleData: visibleData);
   }
 }
