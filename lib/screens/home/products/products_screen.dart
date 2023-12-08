@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:shop_app/localization/index.dart';
 import 'package:shop_app/models/index.dart';
 import 'package:shop_app/router/index.dart';
@@ -21,11 +23,13 @@ class ProductsScreen extends StatelessWidget implements AutoRouteWrapper {
   Widget build(BuildContext context) {
     EasyLocalization.of(context);
 
+    final productsBloc = context.read<ProductsBloc>();
+
     return RefreshIndicator(
       onRefresh: () {
-        final bloc = context.read<ProductsBloc>()..load();
+        productsBloc.loadAsyncFuture();
 
-        return bloc.stream
+        return productsBloc.stream
             .firstWhere((state) => state.status != NetworkStatus.loading);
       },
       child: CustomScrollView(
@@ -39,7 +43,7 @@ class ProductsScreen extends StatelessWidget implements AutoRouteWrapper {
                 suffixIcon: Icon(Icons.search),
               ),
               onSubmitted: (value) {
-                context.read<ProductsBloc>().search(value);
+                productsBloc.search(value);
               },
             ),
           ),
@@ -55,12 +59,14 @@ class ProductsScreen extends StatelessWidget implements AutoRouteWrapper {
                   );
                 case NetworkStatus.success:
                   final products = state.visibleData;
+
                   return SliverPadding(
                     padding: const EdgeInsets.all(10),
                     sliver: SliverGrid.count(
                       crossAxisCount: 2,
                       mainAxisSpacing: 15,
                       crossAxisSpacing: 15,
+                      childAspectRatio: 1 / 1.3,
                       children: products
                           .map((product) => ProductItem(product: product))
                           .toList(),
