@@ -1,7 +1,7 @@
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shop_app/models/general_models.dart';
 
+import 'package:shop_app/models/general_models.dart';
 import 'package:shop_app/services/http/http_client.dart';
 
 @Injectable(scope: 'auth')
