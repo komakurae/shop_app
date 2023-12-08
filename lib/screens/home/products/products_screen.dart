@@ -27,10 +27,7 @@ class ProductsScreen extends StatelessWidget implements AutoRouteWrapper {
 
     return RefreshIndicator(
       onRefresh: () {
-        productsBloc.loadAsyncFuture();
-
-        return productsBloc.stream
-            .firstWhere((state) => state.status != NetworkStatus.loading);
+        return productsBloc.loadAsyncFuture();
       },
       child: CustomScrollView(
         slivers: [
