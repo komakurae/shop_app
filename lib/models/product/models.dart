@@ -10,13 +10,42 @@ class Product with _$Product {
     @Default('') String title,
     @Default(0.0) double price,
     @Default('') String description,
-    @Default('') String category,
+    @Default(Category.none) Category category,
     @Default('') String image,
     @Default(Rating()) Rating rating,
   }) = _Product;
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
+}
+
+enum Category {
+  none('none'),
+  electronics('electronics'),
+  jewelery('jewelery'),
+  @JsonValue("men's clothing")
+  mensClothing("men's clothing"),
+  @JsonValue("women's clothing")
+  womensClothing("women's clothing");
+
+  final String label;
+
+  const Category(this.label);
+
+  factory Category.fromJson(String json) {
+    switch (json) {
+      case 'electronics':
+        return Category.electronics;
+      case 'jewelery':
+        return Category.jewelery;
+      case "men's clothing":
+        return Category.mensClothing;
+      case "women's clothing":
+        return Category.womensClothing;
+      default:
+        return Category.none;
+    }
+  }
 }
 
 @freezed

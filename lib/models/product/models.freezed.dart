@@ -24,7 +24,7 @@ mixin _$Product {
   String get title => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
+  Category get category => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   Rating get rating => throw _privateConstructorUsedError;
 
@@ -43,7 +43,7 @@ abstract class $ProductCopyWith<$Res> {
       String title,
       double price,
       String description,
-      String category,
+      Category category,
       String image,
       Rating rating});
 
@@ -91,7 +91,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Category,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -124,7 +124,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String title,
       double price,
       String description,
-      String category,
+      Category category,
       String image,
       Rating rating});
 
@@ -171,7 +171,7 @@ class __$$ProductImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Category,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -192,7 +192,7 @@ class _$ProductImpl implements _Product {
       this.title = '',
       this.price = 0.0,
       this.description = '',
-      this.category = '',
+      this.category = Category.none,
       this.image = '',
       this.rating = const Rating()});
 
@@ -213,7 +213,7 @@ class _$ProductImpl implements _Product {
   final String description;
   @override
   @JsonKey()
-  final String category;
+  final Category category;
   @override
   @JsonKey()
   final String image;
@@ -267,7 +267,7 @@ abstract class _Product implements Product {
       final String title,
       final double price,
       final String description,
-      final String category,
+      final Category category,
       final String image,
       final Rating rating}) = _$ProductImpl;
 
@@ -282,7 +282,7 @@ abstract class _Product implements Product {
   @override
   String get description;
   @override
-  String get category;
+  Category get category;
   @override
   String get image;
   @override

@@ -1,21 +1,30 @@
 import 'package:injectable/injectable.dart';
 import 'package:stx_bloc_base/stx_bloc_base.dart';
+import 'package:tuple/tuple.dart';
 
 import 'package:shop_app/models/product/models.dart';
 import 'package:shop_app/repositories/products_repository.dart';
 
-typedef ProductsState = NetworkSearchableState<List<Product>>;
+typedef ProductsState
+    = NetworkFilterableExtraState<List<Product>, Category, List<Category>>;
 
 @lazySingleton
-class ProductsBloc extends NetworkSearchableListBloc<Product, ProductsState> {
+class ProductsBloc
+    extends NetworkFilterableListBloc<Product, Category, ProductsState>
+    with
+        NetworkExtraBaseMixin<List<Product>, List<Category>, ProductsState>,
+        NetworkExtraBlocMixin<List<Product>, List<Category>, ProductsState> {
   ProductsBloc({
     required this.repository,
   }) : super(
           const ProductsState(
             data: [],
             visibleData: [],
+            extraData: [],
           ),
-        );
+        ) {
+    super.network();
+  }
 
   final ProductsRepository repository;
 
@@ -25,10 +34,16 @@ class ProductsBloc extends NetworkSearchableListBloc<Product, ProductsState> {
   }
 
   @override
-  Future<List<Product>> onLoadAsync() async {
-    final products = repository.getAllProducts();
+  Future<Tuple2<List<Product>, List<Category>>> onLoadWithExtraAsync() async {
+    final response = await Future.wait([
+      repository.getAllProducts(),
+      repository.getAllCategories(),
+    ]);
 
-    return products;
+    return Tuple2(
+      response.first as List<Product>,
+      response.last as List<Category>,
+    );
   }
 
   @override
@@ -43,6 +58,12 @@ class ProductsBloc extends NetworkSearchableListBloc<Product, ProductsState> {
           .where(
             (product) => RegExp(state.query!).hasMatch(product.title),
           )
+          .toList();
+    }
+
+    if (state.filter != null && state.filter != Category.none) {
+      visibleData = visibleData
+          .where((product) => product.category == state.filter)
           .toList();
     }
 

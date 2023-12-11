@@ -12,7 +12,8 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String? ?? '',
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
       description: json['description'] as String? ?? '',
-      category: json['category'] as String? ?? '',
+      category: $enumDecodeNullable(_$CategoryEnumMap, json['category']) ??
+          Category.none,
       image: json['image'] as String? ?? '',
       rating: json['rating'] == null
           ? const Rating()
@@ -25,10 +26,18 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'title': instance.title,
       'price': instance.price,
       'description': instance.description,
-      'category': instance.category,
+      'category': _$CategoryEnumMap[instance.category]!,
       'image': instance.image,
       'rating': instance.rating,
     };
+
+const _$CategoryEnumMap = {
+  Category.none: 'none',
+  Category.electronics: 'electronics',
+  Category.jewelery: 'jewelery',
+  Category.mensClothing: "men's clothing",
+  Category.womensClothing: "women's clothing",
+};
 
 _$RatingImpl _$$RatingImplFromJson(Map<String, dynamic> json) => _$RatingImpl(
       rate: (json['rate'] as num?)?.toDouble() ?? 0.0,

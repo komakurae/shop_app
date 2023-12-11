@@ -9,13 +9,24 @@ class ProductsRepository {
 
   ProductsRepository(this.httpClient);
 
-  String get endpointUrl => '/products';
+  String get productsEndpointUrl => '/products';
 
   Future<List<Product>> getAllProducts() async {
-    final response = await httpClient.get(endpointUrl);
+    final response = await httpClient.get(productsEndpointUrl);
 
     return (response.data as List)
         .map<Product>((jsonProduct) => Product.fromJson(jsonProduct))
         .toList();
+  }
+
+  Future<List<Category>> getAllCategories() async {
+    final response = await httpClient.get('$productsEndpointUrl/categories');
+
+    return (response.data as List)
+        .map(
+          (jsonCategory) => Category.fromJson(jsonCategory),
+        )
+        .toList()
+      ..add(Category.none);
   }
 }
