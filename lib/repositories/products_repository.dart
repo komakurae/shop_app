@@ -19,19 +19,14 @@ class ProductsRepository {
         .toList();
   }
 
-  // Category
-
-  String get categoriesEndpoint => '/categories';
-
   Future<List<Category>> getAllCategories() async {
-    final response =
-        await httpClient.get('$productsEndpointUrl$categoriesEndpoint');
+    final response = await httpClient.get('$productsEndpointUrl/categories');
 
-    return ((response.data as List)
+    return (response.data as List)
         .map(
-          (jsonCategory) => CategoryExtension.categoryFromString(jsonCategory),
+          (jsonCategory) => Category.fromJson(jsonCategory),
         )
         .toList()
-      ..add(Category.none));
+      ..add(Category.none);
   }
 }
