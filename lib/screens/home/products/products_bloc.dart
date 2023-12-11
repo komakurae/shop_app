@@ -40,7 +40,10 @@ class ProductsBloc
       repository.getAllCategories(),
     ]);
 
-    return Tuple2(response[0] as List<Product>, response[1] as List<Category>);
+    return Tuple2(
+      response.first as List<Product>,
+      response.last as List<Category>,
+    );
   }
 
   @override
