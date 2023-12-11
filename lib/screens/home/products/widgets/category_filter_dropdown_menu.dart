@@ -15,7 +15,9 @@ class CategoryFilterDropDownMenu extends StatelessWidget {
     return BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
         return DropdownMenu<Category>(
+          width: 300,
           hintText: 'Sort by categories',
+          initialSelection: state.filter,
           leadingIcon: const Icon(Icons.filter_alt),
           dropdownMenuEntries: state.extraData
               .map(
