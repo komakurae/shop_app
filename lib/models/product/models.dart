@@ -23,7 +23,9 @@ enum Category {
   none('none'),
   electronics('electronics'),
   jewelery('jewelery'),
+  @JsonValue("men's clothing")
   mensClothing("men's clothing"),
+  @JsonValue("women's clothing")
   womensClothing("women's clothing");
 
   final String label;

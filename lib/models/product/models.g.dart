@@ -35,8 +35,8 @@ const _$CategoryEnumMap = {
   Category.none: 'none',
   Category.electronics: 'electronics',
   Category.jewelery: 'jewelery',
-  Category.mensClothing: 'mensClothing',
-  Category.womensClothing: 'womensClothing',
+  Category.mensClothing: "men's clothing",
+  Category.womensClothing: "women's clothing",
 };
 
 _$RatingImpl _$$RatingImplFromJson(Map<String, dynamic> json) => _$RatingImpl(
