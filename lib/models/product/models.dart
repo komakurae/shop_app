@@ -31,11 +31,9 @@ enum Category {
   final String label;
 
   const Category(this.label);
-}
 
-extension CategoryExtension on Category {
-  static Category categoryFromString(String category) {
-    switch (category) {
+  factory Category.fromJson(String json) {
+    switch (json) {
       case 'electronics':
         return Category.electronics;
       case 'jewelery':
