@@ -62,8 +62,6 @@ class ProductsBloc
       visibleData = visibleData
           .where((product) => product.category == state.filter)
           .toList();
-    } else if (state.filter == Category.none) {
-      state.copyWith(visibleData: state.data);
     }
 
     return state.copyWith(visibleData: visibleData);
