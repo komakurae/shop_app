@@ -10,13 +10,42 @@ class Product with _$Product {
     @Default('') String title,
     @Default(0.0) double price,
     @Default('') String description,
-    @Default('') String category,
+    @Default(Category.none) Category category,
     @Default('') String image,
     @Default(Rating()) Rating rating,
   }) = _Product;
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
+}
+
+enum Category {
+  none('none'),
+  electronics('electronics'),
+  jewelery('jewelery'),
+  mensClothing("men's clothing"),
+  womensClothing("women's clothing");
+
+  final String label;
+
+  const Category(this.label);
+}
+
+extension CategoryExtension on Category {
+  static Category categoryFromString(String category) {
+    switch (category) {
+      case 'electronics':
+        return Category.electronics;
+      case 'jewelery':
+        return Category.jewelery;
+      case "men's clothing":
+        return Category.mensClothing;
+      case "women's clothing":
+        return Category.womensClothing;
+      default:
+        return Category.none;
+    }
+  }
 }
 
 @freezed
