@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:injectable/injectable.dart';
+import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
+
 import 'package:shop_app/models/product/models.dart';
 import 'package:shop_app/repositories/products_repository.dart';
 import 'package:shop_app/screens/home/products/products_bloc.dart';
-import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 
 @injectable
 class ProductModalBloc extends FormBloc<Product, String> {

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
+
 import 'package:shop_app/models/product/models.dart';
 import 'package:shop_app/router/index.dart';
 import 'package:shop_app/screens/home/products/modals/product_modal_bloc.dart';
@@ -7,7 +10,6 @@ import 'package:shop_app/screens/home/products/products_bloc.dart';
 import 'package:shop_app/services/index.dart';
 import 'package:shop_app/widgets/form_builder/index.dart';
 import 'package:shop_app/widgets/form_builder/select_input_form_builder.dart';
-import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 
 @RoutePage()
 class ProductsModalScreen extends StatelessWidget implements AutoRouteWrapper {
