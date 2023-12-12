@@ -9,13 +9,11 @@ class SelectInputFormBuilder<T> extends StatefulWidget {
     required this.fieldBloc,
     required this.toLabel,
     this.hintText,
-    this.nextFieldFocusNode,
   });
 
   final SelectFieldBloc<T> fieldBloc;
 
   final String? hintText;
-  final FocusNode? nextFieldFocusNode;
 
   final String Function(T) toLabel;
 
