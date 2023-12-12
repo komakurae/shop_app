@@ -12,6 +12,7 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shop_app/blocs/auth/auth_bloc.dart' as _i6;
 import 'package:shop_app/blocs/index.dart' as _i9;
+import 'package:shop_app/models/product/models.dart' as _i17;
 import 'package:shop_app/repositories/auth_repository.dart' as _i5;
 import 'package:shop_app/repositories/chats_repository.dart' as _i10;
 import 'package:shop_app/repositories/index.dart' as _i7;
@@ -21,6 +22,8 @@ import 'package:shop_app/repositories/user_repository.dart' as _i4;
 import 'package:shop_app/screens/home/messages/chats/bloc/chats_bloc.dart'
     as _i13;
 import 'package:shop_app/screens/home/messages/posts/posts_bloc.dart' as _i14;
+import 'package:shop_app/screens/home/products/modals/product_modal_bloc.dart'
+    as _i16;
 import 'package:shop_app/screens/home/products/products_bloc.dart' as _i15;
 import 'package:shop_app/screens/login/login_form_bloc.dart' as _i8;
 import 'package:shop_app/services/http/http_client.dart' as _i3;
@@ -71,6 +74,15 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i14.PostsBloc(gh<_i7.PostsRepository>()));
     gh.lazySingleton<_i15.ProductsBloc>(
         () => _i15.ProductsBloc(repository: gh<_i12.ProductsRepository>()));
+    gh.factoryParam<_i16.ProductModalBloc, _i17.Product?, dynamic>((
+      initial,
+      _,
+    ) =>
+        _i16.ProductModalBloc(
+          initial: initial,
+          repository: gh<_i12.ProductsRepository>(),
+          productsBloc: gh<_i15.ProductsBloc>(),
+        ));
     return this;
   }
 }
