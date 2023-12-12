@@ -15,7 +15,7 @@ import 'package:shop_app/widgets/form_builder/select_input_form_builder.dart';
 class ProductsModalScreen extends StatelessWidget implements AutoRouteWrapper {
   const ProductsModalScreen({
     super.key,
-    required this.item,
+    this.item,
   });
 
   final Product? item;

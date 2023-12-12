@@ -20,9 +20,9 @@ import 'package:shop_app/screens/home/messages/chats/pages/chat_details/chat_det
     as _i2;
 import 'package:shop_app/screens/home/messages/messages_screen.dart' as _i7;
 import 'package:shop_app/screens/home/messages/posts/posts_screen.dart' as _i8;
-import 'package:shop_app/screens/home/products/products_screen.dart' as _i10;
-import 'package:shop_app/screens/home/products/widgets/products_modal_screen.dart'
+import 'package:shop_app/screens/home/products/modals/products_modal_screen.dart'
     as _i9;
+import 'package:shop_app/screens/home/products/products_screen.dart' as _i10;
 import 'package:shop_app/screens/home/settings/settings_screen.dart' as _i11;
 import 'package:shop_app/screens/login/login_screen.dart' as _i6;
 
@@ -84,7 +84,8 @@ abstract class $AppRouter extends _i12.RootStackRouter {
       );
     },
     ProductsModalRoute.name: (routeData) {
-      final args = routeData.argsAs<ProductsModalRouteArgs>();
+      final args = routeData.argsAs<ProductsModalRouteArgs>(
+          orElse: () => const ProductsModalRouteArgs());
       return _i12.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i12.WrappedRoute(
@@ -250,7 +251,7 @@ class PostsRoute extends _i12.PageRouteInfo<void> {
 class ProductsModalRoute extends _i12.PageRouteInfo<ProductsModalRouteArgs> {
   ProductsModalRoute({
     _i13.Key? key,
-    required _i15.Product? item,
+    _i15.Product? item,
     List<_i12.PageRouteInfo>? children,
   }) : super(
           ProductsModalRoute.name,
@@ -270,7 +271,7 @@ class ProductsModalRoute extends _i12.PageRouteInfo<ProductsModalRouteArgs> {
 class ProductsModalRouteArgs {
   const ProductsModalRouteArgs({
     this.key,
-    required this.item,
+    this.item,
   });
 
   final _i13.Key? key;

@@ -29,7 +29,7 @@ class ProductsScreen extends StatelessWidget implements AutoRouteWrapper {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.pushRoute(ProductsModalRoute(item: null));
+          context.pushRoute(ProductsModalRoute());
         },
         child: const Icon(Icons.add),
       ),
