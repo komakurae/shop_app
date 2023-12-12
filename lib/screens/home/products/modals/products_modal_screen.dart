@@ -49,23 +49,24 @@ class ProductsModalScreen extends StatelessWidget implements AutoRouteWrapper {
     final formBloc = context.read<ProductModalBloc>();
 
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: formBloc.cancel,
+          icon: const Icon(Icons.close),
+        ),
+        title: Text(
+          formBloc.isEditing ? 'Edit product' : 'Create product',
+        ),
+        actions: [
+          IconButton(
+            onPressed: formBloc.submit,
+            icon: const Icon(Icons.check),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(
-          children: <Widget>[
-            Row(
-              children: [
-                Text(formBloc.isEditing ? 'Edit product' : 'Create product'),
-                const Spacer(),
-                TextButton(
-                  onPressed: formBloc.cancel,
-                  child: const Text('Cancel'),
-                ),
-                TextButton(
-                  onPressed: formBloc.submit,
-                  child: Text(formBloc.isEditing ? 'Save' : 'Create'),
-                ),
-              ],
-            ),
+          children: [
             TextInputFormBuilder(
               fieldBloc: formBloc.title,
               label: 'Title',
@@ -83,13 +84,14 @@ class ProductsModalScreen extends StatelessWidget implements AutoRouteWrapper {
             ),
             SelectInputFormBuilder<Category>(
               fieldBloc: formBloc.category,
-              toLabel: (category) => category.label,
               hintText: 'Select category',
+              toLabel: (category) => category.label,
             ),
-            BlocBuilder<TextFieldBloc, InputFieldBlocState>(
+            BlocSelector<TextFieldBloc, TextFieldBlocState, bool>(
               bloc: formBloc.rating,
-              builder: (context, state) {
-                if (state.hasFormBloc) {
+              selector: (state) => state.hasFormBloc,
+              builder: (context, hasFormBloc) {
+                if (hasFormBloc) {
                   return TextInputFormBuilder(
                     fieldBloc: formBloc.rating,
                     label: 'Rating',
