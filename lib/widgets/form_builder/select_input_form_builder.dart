@@ -6,15 +6,17 @@ import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 class SelectInputFormBuilder<T> extends StatefulWidget {
   const SelectInputFormBuilder({
     super.key,
-    this.hintText,
-    this.nextFieldFocusNode,
     required this.fieldBloc,
     required this.toLabel,
+    this.hintText,
+    this.nextFieldFocusNode,
   });
+
+  final SelectFieldBloc<T> fieldBloc;
 
   final String? hintText;
   final FocusNode? nextFieldFocusNode;
-  final SelectFieldBloc<T> fieldBloc;
+
   final String Function(T) toLabel;
 
   @override

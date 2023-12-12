@@ -16,7 +16,9 @@ class ProductModalBloc extends FormBloc<Product, String> {
   late final TextFieldBloc rating;
 
   final Product? initial;
+
   final ProductsRepository repository;
+
   final ProductsBloc productsBloc;
 
   ProductModalBloc({
