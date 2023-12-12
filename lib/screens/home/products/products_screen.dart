@@ -26,8 +26,14 @@ class ProductsScreen extends StatelessWidget implements AutoRouteWrapper {
 
     final productsBloc = context.read<ProductsBloc>();
 
-    return SafeArea(
-      child: RefreshIndicator(
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.pushRoute(ProductsModalRoute());
+        },
+        child: const Icon(Icons.add),
+      ),
+      body: RefreshIndicator(
         onRefresh: () {
           return productsBloc.loadWithExtraAsyncFuture();
         },
@@ -75,7 +81,16 @@ class ProductsScreen extends StatelessWidget implements AutoRouteWrapper {
                         crossAxisSpacing: 15,
                         childAspectRatio: 1 / 1.3,
                         children: products
-                            .map((product) => ProductItem(product: product))
+                            .map(
+                              (product) => GestureDetector(
+                                onTap: () {
+                                  context.pushRoute(
+                                    ProductsModalRoute(item: product),
+                                  );
+                                },
+                                child: ProductItem(product: product),
+                              ),
+                            )
                             .toList(),
                       ),
                     );
