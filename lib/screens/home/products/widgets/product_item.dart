@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,8 +21,8 @@ class ProductItem extends StatelessWidget {
 
     return Column(
       children: [
-        SizedBox.square(
-          dimension: height / 4,
+        Expanded(
+          flex: 2,
           child: DecoratedBox(
             decoration: const BoxDecoration(
               color: Colors.white,
@@ -28,7 +30,9 @@ class ProductItem extends StatelessWidget {
             child: CachedNetworkImage(
               fit: BoxFit.contain,
               imageUrl: product.image,
-              placeholder: (context, url) => const CircularProgressIndicator(),
+              placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ),
         ),
@@ -37,7 +41,6 @@ class ProductItem extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
         ),
-        const Spacer(),
         Text(
           '${product.price} US\$',
           style: theme.textTheme.labelLarge!.copyWith(
