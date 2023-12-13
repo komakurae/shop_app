@@ -51,7 +51,7 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
                       },
                       icon: const Icon(Icons.date_range),
                       label: const Text('Choose date range'),
-                    )
+                    ),
                   ],
                 ),
               ),
