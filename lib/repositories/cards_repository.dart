@@ -9,7 +9,7 @@ class CardsRepository {
 
   CardsRepository(this.httpClient);
 
-  String get endpoint => '/cards';
+  String get endpoint => '/carts';
 
   Future<List<Card>> getAllCards() async {
     final response = await httpClient.get(endpoint);
