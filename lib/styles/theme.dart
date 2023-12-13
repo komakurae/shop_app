@@ -5,9 +5,10 @@ import 'package:shop_app/styles/index.dart';
 class AppTheme {
   static ThemeData getAppTheme(BuildContext context) {
     return ThemeData(
-      primaryColor: AppColors.primary,
+      useMaterial3: true,
+      primaryColor: Colors.purple,
       colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: AppColors.primary,
+        primarySwatch: Colors.deepPurple,
       ),
       fontFamily: FontFamily.poppins,
     );

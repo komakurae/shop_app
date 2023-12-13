@@ -71,7 +71,9 @@ dependencies:
   flutter_layout_grid: ^2.0.5
   tuple: ^2.0.2
 
+
   #other
+  intl: ^0.18.1
 
 dependency_overrides: 
   analyzer: ^6.0.0

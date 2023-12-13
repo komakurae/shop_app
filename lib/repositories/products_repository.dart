@@ -9,38 +9,18 @@ class ProductsRepository {
 
   ProductsRepository(this.httpClient);
 
-  String get endpointUrl => '/products';
-
-  Future<Product> createProduct(Product product) async {
-    final response = await httpClient.post(
-      endpointUrl,
-      data: product.toJson(),
-    );
-
-    return Product.fromJson(response.data);
-  }
+  String get productsEndpointUrl => '/products';
 
   Future<List<Product>> getAllProducts() async {
-    final response = await httpClient.get(endpointUrl);
+    final response = await httpClient.get(productsEndpointUrl);
 
     return (response.data as List)
         .map<Product>((jsonProduct) => Product.fromJson(jsonProduct))
         .toList();
   }
 
-  Future<Product> updateProduct(Product product) async {
-    final response = await httpClient.put(
-      endpointUrl,
-      data: product.toJson(),
-    );
-
-    return Product.fromJson(response.data);
-  }
-
-  // CATEGORIES METHODS
-
   Future<List<Category>> getAllCategories() async {
-    final response = await httpClient.get('$endpointUrl/categories');
+    final response = await httpClient.get('$productsEndpointUrl/categories');
 
     return (response.data as List)
         .map(
