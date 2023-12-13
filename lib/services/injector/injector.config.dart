@@ -13,15 +13,12 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:shop_app/blocs/auth/auth_bloc.dart' as _i6;
 import 'package:shop_app/blocs/index.dart' as _i9;
 import 'package:shop_app/repositories/auth_repository.dart' as _i5;
-import 'package:shop_app/repositories/chats_repository.dart' as _i10;
+import 'package:shop_app/repositories/cards_repository.dart' as _i10;
 import 'package:shop_app/repositories/index.dart' as _i7;
-import 'package:shop_app/repositories/posts_repository.dart' as _i11;
-import 'package:shop_app/repositories/products_repository.dart' as _i12;
+import 'package:shop_app/repositories/products_repository.dart' as _i11;
 import 'package:shop_app/repositories/user_repository.dart' as _i4;
-import 'package:shop_app/screens/home/messages/chats/bloc/chats_bloc.dart'
-    as _i13;
-import 'package:shop_app/screens/home/messages/posts/posts_bloc.dart' as _i14;
-import 'package:shop_app/screens/home/products/products_bloc.dart' as _i15;
+import 'package:shop_app/screens/home/cards/cards_bloc.dart' as _i12;
+import 'package:shop_app/screens/home/products/products_bloc.dart' as _i13;
 import 'package:shop_app/screens/login/login_form_bloc.dart' as _i8;
 import 'package:shop_app/services/http/http_client.dart' as _i3;
 
@@ -59,18 +56,14 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i10.ChatsRepository>(
-        () => _i10.ChatsRepository(gh<_i3.HttpClient>()));
-    gh.factory<_i11.PostsRepository>(
-        () => _i11.PostsRepository(gh<_i3.HttpClient>()));
-    gh.factory<_i12.ProductsRepository>(
-        () => _i12.ProductsRepository(gh<_i3.HttpClient>()));
-    gh.lazySingleton<_i13.ChatsBloc>(
-        () => _i13.ChatsBloc(repository: gh<_i7.ChatsRepository>()));
-    gh.lazySingleton<_i14.PostsBloc>(
-        () => _i14.PostsBloc(gh<_i7.PostsRepository>()));
-    gh.lazySingleton<_i15.ProductsBloc>(
-        () => _i15.ProductsBloc(repository: gh<_i12.ProductsRepository>()));
+    gh.factory<_i10.CardsRepository>(
+        () => _i10.CardsRepository(gh<_i3.HttpClient>()));
+    gh.factory<_i11.ProductsRepository>(
+        () => _i11.ProductsRepository(gh<_i3.HttpClient>()));
+    gh.lazySingleton<_i12.CardsBloc>(
+        () => _i12.CardsBloc(repository: gh<_i10.CardsRepository>()));
+    gh.lazySingleton<_i13.ProductsBloc>(
+        () => _i13.ProductsBloc(repository: gh<_i11.ProductsRepository>()));
     return this;
   }
 }

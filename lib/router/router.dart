@@ -23,18 +23,15 @@ class AppRouter extends $AppRouter {
               path: '',
               page: HomeRoute.page,
               children: [
-                AutoRoute(page: ProductsRoute.page),
                 AutoRoute(
-                  page: MessagesRoute.page,
-                  children: [
-                    AutoRoute(page: ChatsRoute.page),
-                    AutoRoute(page: PostsRoute.page),
-                  ],
+                  page: ProductsRoute.page,
+                ),
+                AutoRoute(
+                  page: CardsRoute.page,
                 ),
                 AutoRoute(page: SettingsRoute.page),
               ],
             ),
-            AutoRoute(page: ChatDetailsRoute.page),
           ],
         ),
       ],
