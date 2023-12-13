@@ -6,10 +6,7 @@ class AppTheme {
   static ThemeData getAppTheme(BuildContext context) {
     return ThemeData(
       useMaterial3: true,
-      primaryColor: Colors.purple,
-      colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: Colors.deepPurple,
-      ),
+      primaryColor: Colors.white,
       fontFamily: FontFamily.poppins,
     );
   }
