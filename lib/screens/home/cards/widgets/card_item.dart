@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/core/extensions/date_time_extension.dart';
 import 'package:shop_app/models/cards/models.dart' as models;
 
 class CardItem extends StatelessWidget {
@@ -14,12 +15,10 @@ class CardItem extends StatelessWidget {
     return Column(
       children: [
         Text(
-          card.date.toString(),
+          card.date!.format('yyyy.MM.dd'),
         ),
         ...card.products.map(
-          (e) => Text(
-            e.toString(),
-          ),
+          (card) => Text('${card.quantity}'),
         ),
       ],
     );

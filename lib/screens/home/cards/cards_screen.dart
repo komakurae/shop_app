@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/core/extensions/date_time_extension.dart';
 import 'package:shop_app/localization/index.dart';
 import 'package:shop_app/models/index.dart';
 import 'package:shop_app/router/index.dart';
@@ -7,7 +8,7 @@ import 'package:shop_app/screens/home/cards/cards_bloc.dart';
 import 'package:shop_app/screens/home/cards/widgets/card_item.dart';
 
 @RoutePage()
-class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
+class CardsScreen extends StatefulWidget implements AutoRouteWrapper {
   const CardsScreen({super.key});
 
   @override
@@ -15,6 +16,29 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
     context.read<CardsBloc>().load();
 
     return this;
+  }
+
+  @override
+  State<CardsScreen> createState() => _CardsScreenState();
+}
+
+class _CardsScreenState extends State<CardsScreen> {
+  final currentDateTime = DateTime.now();
+
+  late final initialDateTimeRange = DateTimeRange(
+    start: DateTime(currentDateTime.year - 4),
+    end: currentDateTime,
+  );
+
+  late ValueNotifier<DateTimeRange> selectedDateTimeRange;
+
+  @override
+  void initState() {
+    selectedDateTimeRange = ValueNotifier(
+      initialDateTimeRange,
+    );
+
+    super.initState();
   }
 
   @override
@@ -31,31 +55,40 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              title: const Text('Cards'),
               floating: true,
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(50),
                 child: Row(
                   children: [
-                    ElevatedButton.icon(
-                      onPressed: () async {
-                        final selectedDateRange = await showDateRangePicker(
-                          context: context,
-                          // dont like it, ask
-                          firstDate: DateTime(2019, 12, 10),
-                          lastDate: DateTime.now(),
+                    ValueListenableBuilder(
+                      valueListenable: selectedDateTimeRange,
+                      builder: (context, value, child) {
+                        return ElevatedButton.icon(
+                          icon: const Icon(Icons.date_range),
+                          label: Text(
+                            '${value.start.format('yyyy.MM.dd')}-${value.end.format('yyyy.MM.dd')}',
+                          ),
+                          onPressed: () async {
+                            final userSelectedTimeRange =
+                                await showDateRangePicker(
+                              context: context,
+                              firstDate: initialDateTimeRange.start,
+                              lastDate: initialDateTimeRange.end,
+                            );
+                            if (userSelectedTimeRange != null) {
+                              selectedDateTimeRange.value =
+                                  userSelectedTimeRange;
+                              cardsBloc
+                                  .filterAsync(selectedDateTimeRange.value);
+                            }
+                          },
                         );
-                        // maybe there is a better way
-                        if (selectedDateRange != null) {
-                          cardsBloc.filterAsync(selectedDateRange);
-                        }
                       },
-                      icon: const Icon(Icons.date_range),
-                      label: const Text('Choose date range'),
                     ),
                   ],
                 ),
               ),
-              title: const Text('Cards'),
             ),
             BlocBuilder<CardsBloc, CardsState>(
               builder: (context, state) {
