@@ -61,11 +61,11 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
                           onPressed: () async {
                             final userSelectedTimeRange =
                                 await showDateRangePicker(
-                                    context: context,
-                                    firstDate:
-                                        DateTime(currentDateTime.year - 4),
-                                    lastDate: currentDateTime,
-                                    initialDateRange: filter);
+                              context: context,
+                              firstDate: DateTime(currentDateTime.year - 4),
+                              lastDate: currentDateTime,
+                              initialDateRange: filter,
+                            );
                             if (userSelectedTimeRange != null) {
                               cardsBloc.filterAsync(userSelectedTimeRange);
                             }
