@@ -35,7 +35,6 @@ class HomeScreen extends StatelessWidget {
             currentIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
             items: [
-              // cards
               BottomNavigationBarItem(
                 icon: const Icon(Icons.credit_card_sharp),
                 label: LocaleKeys.cards.tr(),
