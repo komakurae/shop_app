@@ -8,7 +8,7 @@ import 'package:shop_app/screens/home/cards/cards_bloc.dart';
 import 'package:shop_app/screens/home/cards/widgets/card_item.dart';
 
 @RoutePage()
-class CardsScreen extends StatefulWidget implements AutoRouteWrapper {
+class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
   const CardsScreen({super.key});
 
   @override
@@ -16,29 +16,6 @@ class CardsScreen extends StatefulWidget implements AutoRouteWrapper {
     context.read<CardsBloc>().load();
 
     return this;
-  }
-
-  @override
-  State<CardsScreen> createState() => _CardsScreenState();
-}
-
-class _CardsScreenState extends State<CardsScreen> {
-  final currentDateTime = DateTime.now();
-
-  late final initialDateTimeRange = DateTimeRange(
-    start: DateTime(currentDateTime.year - 4),
-    end: currentDateTime,
-  );
-
-  late ValueNotifier<DateTimeRange> selectedDateTimeRange;
-
-  @override
-  void initState() {
-    selectedDateTimeRange = ValueNotifier(
-      initialDateTimeRange,
-    );
-
-    super.initState();
   }
 
   @override
@@ -61,26 +38,34 @@ class _CardsScreenState extends State<CardsScreen> {
                 preferredSize: const Size.fromHeight(50),
                 child: Row(
                   children: [
-                    ValueListenableBuilder(
-                      valueListenable: selectedDateTimeRange,
-                      builder: (context, value, child) {
+                    BlocSelector<CardsBloc, CardsState, DateTimeRange?>(
+                      selector: (state) {
+                        return state.filter;
+                      },
+                      builder: (context, filter) {
+                        final currentDateTime = DateTime.now();
+
+                        Widget label = const Text(
+                          'Filter by date range',
+                        );
+                        if (filter != null) {
+                          label = Text(
+                            '${filter.start.format('yyyy.MM.dd')}-${filter.end.format('yyyy.MM.dd')}',
+                          );
+                        }
                         return ElevatedButton.icon(
                           icon: const Icon(Icons.date_range),
-                          label: Text(
-                            '${value.start.format('yyyy.MM.dd')}-${value.end.format('yyyy.MM.dd')}',
-                          ),
+                          label: label,
                           onPressed: () async {
                             final userSelectedTimeRange =
                                 await showDateRangePicker(
-                              context: context,
-                              firstDate: initialDateTimeRange.start,
-                              lastDate: initialDateTimeRange.end,
-                            );
+                                    context: context,
+                                    firstDate:
+                                        DateTime(currentDateTime.year - 4),
+                                    lastDate: currentDateTime,
+                                    initialDateRange: filter);
                             if (userSelectedTimeRange != null) {
-                              selectedDateTimeRange.value =
-                                  userSelectedTimeRange;
-                              cardsBloc
-                                  .filterAsync(selectedDateTimeRange.value);
+                              cardsBloc.filterAsync(userSelectedTimeRange);
                             }
                           },
                         );
