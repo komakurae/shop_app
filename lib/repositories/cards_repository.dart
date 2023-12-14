@@ -24,7 +24,11 @@ class CardsRepository {
     required DateTime end,
   }) async {
     final response = await httpClient.get(
-      '$endpoint?startdate=${start.format()}&enddate=${end.format()}',
+      endpoint,
+      queryParameters: {
+        'startdate': start.format(),
+        'enddate': end.format(),
+      },
     );
 
     return (response.data as List)
