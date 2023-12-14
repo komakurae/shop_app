@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+
 import 'package:shop_app/core/extensions/date_time_extension.dart';
 import 'package:shop_app/models/cards/models.dart';
 import 'package:shop_app/services/http/http_client.dart';
@@ -9,7 +10,7 @@ class CardsRepository {
 
   CardsRepository(this.httpClient);
 
-  String get endpoint => '/cards';
+  String get endpoint => '/carts';
 
   Future<List<Card>> getAllCards() async {
     final response = await httpClient.get(endpoint);
@@ -24,7 +25,11 @@ class CardsRepository {
     required DateTime end,
   }) async {
     final response = await httpClient.get(
-      '$endpoint?startdate=${start.format()}&enddate=${end.format()}',
+      endpoint,
+      queryParameters: {
+        'startdate': start.format(),
+        'enddate': end.format(),
+      },
     );
 
     return (response.data as List)

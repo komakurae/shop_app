@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart' hide Card;
+
+import 'package:injectable/injectable.dart';
+
 import 'package:shop_app/models/cards/models.dart';
 import 'package:shop_app/models/index.dart';
 import 'package:shop_app/repositories/cards_repository.dart';
 
 typedef CardsState = NetworkFilterableState<List<Card>, DateTimeRange>;
 
+@lazySingleton
 class CardsBloc
     extends NetworkFilterableListBloc<Card, DateTimeRange, CardsState> {
   CardsBloc({required this.repository})
@@ -13,9 +17,7 @@ class CardsBloc
             data: [],
             visibleData: [],
           ),
-        ) {
-    super.network();
-  }
+        );
 
   final CardsRepository repository;
 
