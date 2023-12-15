@@ -27,6 +27,10 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
     final cardsBloc = context.read<CardsBloc>();
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.pushRoute(CardsFormRoute()),
+        child: const Icon(Icons.add),
+      ),
       body: RefreshIndicator(
         onRefresh: () {
           return cardsBloc.loadAsyncFuture();
@@ -46,18 +50,19 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
                       },
                       builder: (context, filter) {
                         final currentDateTime = DateTime.now();
+                        var label = 'Filter by date range';
 
-                        Widget label = const Text(
-                          'Filter by date range',
-                        );
                         if (filter != null) {
-                          label = Text(
-                            '${filter.start.format('yyyy.MM.dd')}-${filter.end.format('yyyy.MM.dd')}',
-                          );
+                          final formattedStartDateTime =
+                              filter.start.format('yyyy.MM.dd');
+                          final formattedEndDateTime =
+                              filter.end.format('yyyy.MM.dd');
+                          label =
+                              '$formattedStartDateTime-$formattedEndDateTime';
                         }
                         return ElevatedButton.icon(
                           icon: const Icon(Icons.date_range),
-                          label: label,
+                          label: Text(label),
                           onPressed: () async {
                             final userSelectedTimeRange =
                                 await showDateRangePicker(
@@ -107,7 +112,14 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
                         childAspectRatio: 1 / 1.3,
                         children: cards
                             .map(
-                              (card) => CardItem(card: card),
+                              (card) => GestureDetector(
+                                onTap: () {
+                                  context.pushRoute(
+                                    CardsFormRoute(card: card),
+                                  );
+                                },
+                                child: CardItem(card: card),
+                              ),
                             )
                             .toList(),
                       ),
