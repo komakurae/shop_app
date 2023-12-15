@@ -14,13 +14,12 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.sizeOf(context).height;
     final theme = Theme.of(context);
 
     return Column(
       children: [
-        SizedBox.square(
-          dimension: height / 4,
+        Expanded(
+          flex: 2,
           child: DecoratedBox(
             decoration: const BoxDecoration(
               color: Colors.white,
@@ -28,7 +27,9 @@ class ProductItem extends StatelessWidget {
             child: CachedNetworkImage(
               fit: BoxFit.contain,
               imageUrl: product.image,
-              placeholder: (context, url) => const CircularProgressIndicator(),
+              placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ),
         ),
@@ -37,7 +38,6 @@ class ProductItem extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
         ),
-        const Spacer(),
         Text(
           '${product.price} US\$',
           style: theme.textTheme.labelLarge!.copyWith(
