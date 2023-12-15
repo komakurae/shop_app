@@ -12,10 +12,10 @@ class CardsRepository {
 
   String get endpoint => '/carts';
 
-  Future<Card> createCard(Card card) async {
+  Future<Card> createCard(Card payload) async {
     final response = await httpClient.post(
       endpoint,
-      data: card.toJson(),
+      data: payload.toJson(),
     );
 
     return Card.fromJson(response.data);
@@ -46,10 +46,10 @@ class CardsRepository {
         .toList();
   }
 
-  Future<Card> updateCard(Card card) async {
+  Future<Card> updateCard(Card payload) async {
     final response = await httpClient.put(
-      '$endpoint/${card.id}',
-      data: card.toJson(),
+      '$endpoint/${payload.id}',
+      data: payload.toJson(),
     );
 
     return Card.fromJson(response.data);

@@ -27,7 +27,9 @@ class ProductItem extends StatelessWidget {
             child: CachedNetworkImage(
               fit: BoxFit.contain,
               imageUrl: product.image,
-              placeholder: (context, url) => const CircularProgressIndicator(),
+              placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ),
         ),

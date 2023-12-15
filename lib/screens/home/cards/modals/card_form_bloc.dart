@@ -15,15 +15,15 @@ class CardFormBloc extends FormBloc<Card, String> {
   late final ListFieldBloc<Product> products;
 
   final Card? initial;
+  final CardsBloc cardsBloc;
   final CardsRepository cardsRepository;
   final ProductsRepository productsRepository;
-  final CardsBloc cardsBloc;
 
   CardFormBloc({
     @factoryParam this.initial,
+    required this.cardsBloc,
     required this.cardsRepository,
     required this.productsRepository,
-    required this.cardsBloc,
   }) : super(isEditing: initial != null) {
     dateTime = DateTimeFieldBloc(
       initialValue: initial?.date,
@@ -31,7 +31,10 @@ class CardFormBloc extends FormBloc<Card, String> {
     );
     products = ListFieldBloc();
 
-    addFields([dateTime, products]);
+    addFields([
+      dateTime,
+      products,
+    ]);
   }
 
   @override

@@ -83,13 +83,10 @@ class CardsFormScreen extends StatelessWidget implements AutoRouteWrapper {
                         .map((product) => ProductItem(product: product))
                         .toList(),
                   );
-                } else if (state.value.isEmpty) {
-                  return const Center(
-                    child: Text('No products'),
-                  );
                 }
+
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: Text('No products'),
                 );
               },
             ),
