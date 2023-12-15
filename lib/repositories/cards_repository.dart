@@ -48,7 +48,7 @@ class CardsRepository {
 
   Future<Card> updateCard(Card card) async {
     final response = await httpClient.put(
-      endpoint,
+      '$endpoint/${card.id}',
       data: card.toJson(),
     );
 
