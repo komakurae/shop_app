@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:shop_app/models/product/models.dart';
 
 import 'router.gr.dart';
 
@@ -32,7 +33,12 @@ class AppRouter extends $AppRouter {
                 AutoRoute(page: SettingsRoute.page),
               ],
             ),
-            AutoRoute(page: CardsFormRoute.page),
+            AutoRoute(
+              page: CardsFormRoute.page,
+            ),
+            AutoRoute(
+              page: AddProductRoute.page,
+            ),
           ],
         ),
       ],
