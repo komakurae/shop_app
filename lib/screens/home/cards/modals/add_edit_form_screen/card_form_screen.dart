@@ -7,7 +7,7 @@ import 'package:shop_app/blocs/index.dart';
 import 'package:shop_app/models/cards/models.dart' as models;
 import 'package:shop_app/models/product/models.dart';
 import 'package:shop_app/router/index.dart';
-import 'package:shop_app/screens/home/cards/modals/card_form_bloc.dart';
+import 'package:shop_app/screens/home/cards/modals/add_edit_form_screen/card_form_bloc.dart';
 import 'package:shop_app/screens/home/products/widgets/product_item.dart';
 import 'package:shop_app/services/index.dart';
 import 'package:shop_app/widgets/form_builder/date_time_form_builder.dart';
@@ -69,7 +69,6 @@ class CardsFormScreen extends StatelessWidget implements AutoRouteWrapper {
           DateTimeFormBuilder(
             fieldBloc: formBloc.dateTime,
           ),
-          // later I will add some reusable widget for Products
           Expanded(
             flex: 2,
             child: BlocBuilder<ListFieldBloc<Product>,
@@ -79,9 +78,38 @@ class CardsFormScreen extends StatelessWidget implements AutoRouteWrapper {
                 if (state.value.isNotEmpty) {
                   return GridView.count(
                     crossAxisCount: 2,
-                    children: state.value
-                        .map((product) => ProductItem(product: product))
-                        .toList(),
+                    children: [
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          context.pushRoute(
+                            AddProductRoute(
+                              hashedProducts: state.extraData,
+                              selectedProducts: state.value,
+                              onSubmit: (p0) => formBloc.products.addAll(p0),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: DecoratedBox(
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                side:
+                                    const BorderSide(color: Colors.deepPurple),
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              size: 50,
+                            ),
+                          ),
+                        ),
+                      ),
+                      ...state.value
+                          .map((product) => ProductItem(product: product)),
+                    ],
                   );
                 }
 

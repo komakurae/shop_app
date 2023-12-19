@@ -113,6 +113,7 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
                         children: cards
                             .map(
                               (card) => GestureDetector(
+                                behavior: HitTestBehavior.opaque,
                                 onTap: () {
                                   context.pushRoute(
                                     CardsFormRoute(card: card),
