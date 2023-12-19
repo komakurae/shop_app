@@ -89,8 +89,6 @@ class CardsFormScreen extends StatelessWidget implements AutoRouteWrapper {
                               onSubmit: (p0) => formBloc.products.addAll(p0),
                             ),
                           );
-                          // why not working
-                          print('after popped');
                         },
                         child: Container(
                           alignment: Alignment.center,
@@ -110,7 +108,7 @@ class CardsFormScreen extends StatelessWidget implements AutoRouteWrapper {
                         ),
                       ),
                       ...state.value
-                          .map((product) => ProductItem(product: product))
+                          .map((product) => ProductItem(product: product)),
                     ],
                   );
                 }

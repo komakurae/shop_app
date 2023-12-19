@@ -1,13 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
+
 import 'package:shop_app/models/product/models.dart';
 import 'package:shop_app/router/index.dart';
 import 'package:shop_app/screens/home/cards/modals/add_product_screen/add_product_form_bloc.dart';
 import 'package:shop_app/screens/home/products/widgets/product_item.dart';
 import 'package:shop_app/services/index.dart';
-import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 
 @RoutePage()
 class AddProductScreen extends StatelessWidget implements AutoRouteWrapper {

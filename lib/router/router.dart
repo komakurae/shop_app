@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:shop_app/models/product/models.dart';
 
 import 'router.gr.dart';
 
