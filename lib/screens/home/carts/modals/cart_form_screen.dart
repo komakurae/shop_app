@@ -3,28 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 
-import 'package:shop_app/blocs/index.dart';
-import 'package:shop_app/models/cards/models.dart' as models;
+import 'package:shop_app/models/cart/models.dart' as models;
 import 'package:shop_app/models/product/models.dart';
 import 'package:shop_app/router/index.dart';
-import 'package:shop_app/screens/home/cards/modals/card_form_bloc.dart';
+import 'package:shop_app/screens/home/carts/carts_bloc.dart';
+import 'package:shop_app/screens/home/carts/modals/cart_form_bloc.dart';
 import 'package:shop_app/screens/home/products/widgets/product_item.dart';
 import 'package:shop_app/services/index.dart';
 import 'package:shop_app/widgets/form_builder/date_time_form_builder.dart';
 import 'package:shop_app/widgets/index.dart';
 
 @RoutePage()
-class CardsFormScreen extends StatelessWidget implements AutoRouteWrapper {
-  const CardsFormScreen({
+class CartsFormScreen extends StatelessWidget implements AutoRouteWrapper {
+  const CartsFormScreen({
     super.key,
-    this.card,
+    this.cart,
   });
 
-  final models.Card? card;
+  final models.Cart? cart;
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    final formBloc = getIt<CardFormBloc>(param1: card);
+    final formBloc = getIt<CartFormBloc>(param1: cart);
 
     return BlocProvider(
       create: (context) => formBloc..initialize(),
@@ -32,12 +32,12 @@ class CardsFormScreen extends StatelessWidget implements AutoRouteWrapper {
         formBloc: formBloc,
         onCancel: (context, state) => context.popRoute(),
         onSuccess: (context, state) {
-          final cardsBloc = context.read<CardsBloc>();
+          final cartsBloc = context.read<CartsBloc>();
 
           if (state.isEditing) {
-            cardsBloc.editItem(state.response! as models.Card);
+            cartsBloc.editItem(state.response! as models.Cart);
           } else {
-            cardsBloc.addItem(state.response! as models.Card);
+            cartsBloc.addItem(state.response! as models.Cart);
           }
           context.popRoute();
         },
@@ -48,7 +48,7 @@ class CardsFormScreen extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    final formBloc = context.read<CardFormBloc>();
+    final formBloc = context.read<CartFormBloc>();
 
     return Scaffold(
       appBar: AppBar(
@@ -56,7 +56,7 @@ class CardsFormScreen extends StatelessWidget implements AutoRouteWrapper {
           icon: const Icon(Icons.close),
           onPressed: formBloc.cancel,
         ),
-        title: Text(formBloc.isEditing ? 'Edit card' : 'Create card'),
+        title: Text(formBloc.isEditing ? 'Edit Cart' : 'Create Cart'),
         actions: [
           IconButton(
             icon: const Icon(Icons.check),

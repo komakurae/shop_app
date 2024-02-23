@@ -12,15 +12,17 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shop_app/blocs/auth/auth_bloc.dart' as _i6;
 import 'package:shop_app/blocs/index.dart' as _i9;
-import 'package:shop_app/models/cards/models.dart' as _i15;
+import 'package:shop_app/models/cart/models.dart' as _i16;
 import 'package:shop_app/repositories/auth_repository.dart' as _i5;
-import 'package:shop_app/repositories/cards_repository.dart' as _i10;
+import 'package:shop_app/repositories/carts_repository.dart' as _i10;
 import 'package:shop_app/repositories/index.dart' as _i7;
 import 'package:shop_app/repositories/products_repository.dart' as _i11;
 import 'package:shop_app/repositories/user_repository.dart' as _i4;
-import 'package:shop_app/screens/home/cards/cards_bloc.dart' as _i12;
-import 'package:shop_app/screens/home/cards/modals/card_form_bloc.dart' as _i14;
-import 'package:shop_app/screens/home/products/products_bloc.dart' as _i13;
+import 'package:shop_app/screens/home/carts/carts_bloc.dart' as _i12;
+import 'package:shop_app/screens/home/carts/modals/cart_form_bloc.dart' as _i15;
+import 'package:shop_app/screens/home/products/pages/blocs/bloc/product_bloc.dart'
+    as _i13;
+import 'package:shop_app/screens/home/products/products_bloc.dart' as _i14;
 import 'package:shop_app/screens/login/login_form_bloc.dart' as _i8;
 import 'package:shop_app/services/http/http_client.dart' as _i3;
 
@@ -58,23 +60,31 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i10.CardsRepository>(
-        () => _i10.CardsRepository(gh<_i3.HttpClient>()));
+    gh.factory<_i10.CartsRepository>(
+        () => _i10.CartsRepository(gh<_i3.HttpClient>()));
     gh.factory<_i11.ProductsRepository>(
         () => _i11.ProductsRepository(gh<_i3.HttpClient>()));
-    gh.lazySingleton<_i12.CardsBloc>(
-        () => _i12.CardsBloc(repository: gh<_i10.CardsRepository>()));
-    gh.lazySingleton<_i13.ProductsBloc>(
-        () => _i13.ProductsBloc(repository: gh<_i11.ProductsRepository>()));
-    gh.factoryParam<_i14.CardFormBloc, _i15.Card?, dynamic>((
+    gh.lazySingleton<_i12.CartsBloc>(
+        () => _i12.CartsBloc(repository: gh<_i10.CartsRepository>()));
+    gh.factoryParam<_i13.ProductBloc, int, dynamic>((
+      id,
+      _,
+    ) =>
+        _i13.ProductBloc(
+          repository: gh<_i7.ProductsRepository>(),
+          id: id,
+        ));
+    gh.lazySingleton<_i14.ProductsBloc>(
+        () => _i14.ProductsBloc(repository: gh<_i11.ProductsRepository>()));
+    gh.factoryParam<_i15.CartFormBloc, _i16.Cart?, dynamic>((
       initial,
       _,
     ) =>
-        _i14.CardFormBloc(
+        _i15.CartFormBloc(
           initial: initial,
-          cardsRepository: gh<_i10.CardsRepository>(),
+          cartsBloc: gh<_i12.CartsBloc>(),
+          cartsRepository: gh<_i10.CartsRepository>(),
           productsRepository: gh<_i7.ProductsRepository>(),
-          cardsBloc: gh<_i9.CardsBloc>(),
         ));
     return this;
   }

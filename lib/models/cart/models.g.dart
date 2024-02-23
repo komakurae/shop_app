@@ -6,19 +6,19 @@ part of 'models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CardImpl _$$CardImplFromJson(Map<String, dynamic> json) => _$CardImpl(
+_$CartImpl _$$CartImplFromJson(Map<String, dynamic> json) => _$CartImpl(
       id: json['id'] as int? ?? 0,
       userId: json['userId'] as int? ?? 0,
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
       products: (json['products'] as List<dynamic>?)
-              ?.map((e) => CardProduct.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => CartProduct.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       v: json['v'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$CardImplToJson(_$CardImpl instance) =>
+Map<String, dynamic> _$$CartImplToJson(_$CartImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
@@ -27,13 +27,13 @@ Map<String, dynamic> _$$CardImplToJson(_$CardImpl instance) =>
       'v': instance.v,
     };
 
-_$CardProductImpl _$$CardProductImplFromJson(Map<String, dynamic> json) =>
-    _$CardProductImpl(
+_$CartProductImpl _$$CartProductImplFromJson(Map<String, dynamic> json) =>
+    _$CartProductImpl(
       productId: json['productId'] as int? ?? 0,
       quantity: json['quantity'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$CardProductImplToJson(_$CardProductImpl instance) =>
+Map<String, dynamic> _$$CartProductImplToJson(_$CartProductImpl instance) =>
     <String, dynamic>{
       'productId': instance.productId,
       'quantity': instance.quantity,

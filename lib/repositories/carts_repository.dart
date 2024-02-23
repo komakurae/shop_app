@@ -1,35 +1,35 @@
 import 'package:injectable/injectable.dart';
 
 import 'package:shop_app/core/extensions/date_time_extension.dart';
-import 'package:shop_app/models/cards/models.dart';
+import 'package:shop_app/models/cart/models.dart';
 import 'package:shop_app/services/http/http_client.dart';
 
 @injectable
-class CardsRepository {
+class CartsRepository {
   final HttpClient httpClient;
 
-  CardsRepository(this.httpClient);
+  CartsRepository(this.httpClient);
 
   String get endpoint => '/carts';
 
-  Future<Card> createCard(Card payload) async {
+  Future<Cart> createCart(Cart payload) async {
     final response = await httpClient.post(
       endpoint,
       data: payload.toJson(),
     );
 
-    return Card.fromJson(response.data);
+    return Cart.fromJson(response.data);
   }
 
-  Future<List<Card>> getAllCards() async {
+  Future<List<Cart>> getAllCarts() async {
     final response = await httpClient.get(endpoint);
 
     return (response.data as List)
-        .map((jsonCard) => Card.fromJson(jsonCard))
+        .map((jsonCart) => Cart.fromJson(jsonCart))
         .toList();
   }
 
-  Future<List<Card>> getCardsInDateRange({
+  Future<List<Cart>> getCartsInDateRange({
     required DateTime start,
     required DateTime end,
   }) async {
@@ -42,16 +42,16 @@ class CardsRepository {
     );
 
     return (response.data as List)
-        .map((jsonCard) => Card.fromJson(jsonCard))
+        .map((jsonCart) => Cart.fromJson(jsonCart))
         .toList();
   }
 
-  Future<Card> updateCard(Card payload) async {
+  Future<Cart> updateCart(Cart payload) async {
     final response = await httpClient.put(
       '$endpoint/${payload.id}',
       data: payload.toJson(),
     );
 
-    return Card.fromJson(response.data);
+    return Cart.fromJson(response.data);
   }
 }

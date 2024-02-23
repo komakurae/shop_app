@@ -19,6 +19,12 @@ class ProductsRepository {
         .toList();
   }
 
+  Future<Product> getProductById(int id) async {
+    final response = await httpClient.get('$productsEndpointUrl/$id');
+
+    return Product.fromJson(response.data);
+  }
+
   Future<List<Category>> getAllCategories() async {
     final response = await httpClient.get('$productsEndpointUrl/categories');
 

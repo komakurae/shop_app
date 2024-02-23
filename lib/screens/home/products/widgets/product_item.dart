@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:shop_app/models/product/models.dart';
+import 'package:shop_app/router/index.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({
@@ -16,32 +17,61 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Column(
+    return Stack(
       children: [
-        Expanded(
-          flex: 2,
-          child: DecoratedBox(
-            decoration: const BoxDecoration(
+        Positioned.fill(
+          child: GestureDetector(
+            onTap: () {
+              context.router.push(
+                ProductRoute(productId: product.id),
+              );
+            },
+            child: Card(
               color: Colors.white,
-            ),
-            child: CachedNetworkImage(
-              fit: BoxFit.contain,
-              imageUrl: product.image,
-              placeholder: (context, url) => const Center(
-                child: CircularProgressIndicator(),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: DecoratedBox(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        child: CachedNetworkImage(
+                          fit: BoxFit.contain,
+                          imageUrl: product.image,
+                          placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      product.title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      '${product.price} US\$',
+                      style: theme.textTheme.labelLarge!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
-        Text(
-          product.title,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-        ),
-        Text(
-          '${product.price} US\$',
-          style: theme.textTheme.labelLarge!.copyWith(
-            fontWeight: FontWeight.bold,
+        Align(
+          alignment: const Alignment(0.95, -0.95),
+          child: IconButton.filledTonal(
+            icon: const Icon(Icons.favorite_outline),
+            selectedIcon: const Icon(Icons.favorite),
+            onPressed: () {},
           ),
         ),
       ],
