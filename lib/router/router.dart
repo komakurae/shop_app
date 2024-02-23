@@ -1,6 +1,4 @@
-import 'package:auto_route/auto_route.dart';
-
-import 'router.gr.dart';
+import 'package:shop_app/router/index.dart';
 
 @AutoRouterConfig(
   replaceInRouteName: 'Page|Screen,Route',
@@ -24,15 +22,26 @@ class AppRouter extends $AppRouter {
               page: HomeRoute.page,
               children: [
                 AutoRoute(
-                  page: ProductsRoute.page,
+                  page: ProductsRouter.page,
+                  initial: true,
+                  children: [
+                    AutoRoute(
+                      path: '',
+                      page: ProductsRoute.page,
+                    ),
+                    AutoRoute(
+                      path: ':id',
+                      page: ProductRoute.page,
+                    ),
+                  ],
                 ),
                 AutoRoute(
-                  page: CardsRoute.page,
+                  page: CartsRoute.page,
                 ),
                 AutoRoute(page: SettingsRoute.page),
               ],
             ),
-            AutoRoute(page: CardsFormRoute.page),
+            AutoRoute(page: CartsFormRoute.page),
           ],
         ),
       ],

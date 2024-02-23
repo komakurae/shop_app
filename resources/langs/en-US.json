@@ -2,7 +2,7 @@
     "screenText": "Screen",
     "products": "Products",
     "productsScreenTitle": "@:products @:screenText",
-    "cards": "Cards",
+    "cards": "Carts",
     "settings": "Settings",
     "settingsScreenTitle": "@:settings @:screenText",
     "changePassword": "Change Password",

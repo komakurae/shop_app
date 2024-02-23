@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:shop_app/blocs/index.dart';
 import 'package:shop_app/core/extensions/date_time_extension.dart';
 import 'package:shop_app/localization/index.dart';
 import 'package:shop_app/models/index.dart';
 import 'package:shop_app/router/index.dart';
-import 'package:shop_app/screens/home/cards/cards_bloc.dart';
-import 'package:shop_app/screens/home/cards/widgets/card_item.dart';
+import 'package:shop_app/screens/home/carts/widgets/cart_item.dart';
 
 @RoutePage()
-class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
-  const CardsScreen({super.key});
+class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
+  const CartsScreen({super.key});
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    context.read<CardsBloc>().load();
+    context.read<CartsBloc>().load();
 
     return this;
   }
@@ -24,11 +24,11 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
   Widget build(BuildContext context) {
     EasyLocalization.of(context);
 
-    final cardsBloc = context.read<CardsBloc>();
+    final cardsBloc = context.read<CartsBloc>();
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.pushRoute(CardsFormRoute()),
+        onPressed: () => context.pushRoute(CartsFormRoute()),
         child: const Icon(Icons.add),
       ),
       body: RefreshIndicator(
@@ -44,7 +44,7 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
                 preferredSize: const Size.fromHeight(50),
                 child: Row(
                   children: [
-                    BlocSelector<CardsBloc, CardsState, DateTimeRange?>(
+                    BlocSelector<CartsBloc, CartsState, DateTimeRange?>(
                       selector: (state) {
                         return state.filter;
                       },
@@ -82,7 +82,7 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
                 ),
               ),
             ),
-            BlocBuilder<CardsBloc, CardsState>(
+            BlocBuilder<CartsBloc, CartsState>(
               builder: (context, state) {
                 switch (state.status) {
                   case NetworkStatus.initial:
@@ -112,13 +112,13 @@ class CardsScreen extends StatelessWidget implements AutoRouteWrapper {
                         childAspectRatio: 1 / 1.3,
                         children: cards
                             .map(
-                              (card) => GestureDetector(
+                              (cart) => GestureDetector(
                                 onTap: () {
                                   context.pushRoute(
-                                    CardsFormRoute(card: card),
+                                    CartsFormRoute(cart: cart),
                                   );
                                 },
-                                child: CardItem(card: card),
+                                child: CartItem(cart: cart),
                               ),
                             )
                             .toList(),

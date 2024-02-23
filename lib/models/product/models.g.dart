@@ -12,8 +12,9 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String? ?? '',
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
       description: json['description'] as String? ?? '',
-      category: $enumDecodeNullable(_$CategoryEnumMap, json['category']) ??
-          Category.none,
+      category: json['category'] == null
+          ? Category.none
+          : Category.fromJson(json['category'] as String),
       image: json['image'] as String? ?? '',
       rating: json['rating'] == null
           ? const Rating()

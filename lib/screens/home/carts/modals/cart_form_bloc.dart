@@ -3,26 +3,26 @@ import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 
-import 'package:shop_app/blocs/index.dart';
-import 'package:shop_app/models/cards/models.dart';
+import 'package:shop_app/models/cart/models.dart';
 import 'package:shop_app/models/product/models.dart';
-import 'package:shop_app/repositories/cards_repository.dart';
+import 'package:shop_app/repositories/carts_repository.dart';
 import 'package:shop_app/repositories/index.dart';
+import 'package:shop_app/screens/home/carts/carts_bloc.dart';
 
 @injectable
-class CardFormBloc extends FormBloc<Card, String> {
+class CartFormBloc extends FormBloc<Cart, String> {
   late final DateTimeFieldBloc dateTime;
   late final ListFieldBloc<Product> products;
 
-  final Card? initial;
-  final CardsBloc cardsBloc;
-  final CardsRepository cardsRepository;
+  final Cart? initial;
+  final CartsBloc cartsBloc;
+  final CartsRepository cartsRepository;
   final ProductsRepository productsRepository;
 
-  CardFormBloc({
+  CartFormBloc({
     @factoryParam this.initial,
-    required this.cardsBloc,
-    required this.cardsRepository,
+    required this.cartsBloc,
+    required this.cartsRepository,
     required this.productsRepository,
   }) : super(isEditing: initial != null) {
     dateTime = DateTimeFieldBloc(
@@ -51,11 +51,11 @@ class CardFormBloc extends FormBloc<Card, String> {
       products.extraData = hashedProducts;
 
       if (initial != null) {
-        final cardProductsWithDetails = initial!.products
-            .map((productCard) => hashedProducts[productCard.productId]!)
+        final cartProductsWithDetails = initial!.products
+            .map((productCart) => hashedProducts[productCart.productId]!)
             .toList();
 
-        products.value = cardProductsWithDetails;
+        products.value = cartProductsWithDetails;
       }
 
       emitInitial();
@@ -70,15 +70,15 @@ class CardFormBloc extends FormBloc<Card, String> {
   FutureOr<void> onSubmit() async {
     emitLoading();
 
-    var payload = (initial ?? const Card()).copyWith(
+    var payload = (initial ?? const Cart()).copyWith(
       date: dateTime.value,
     );
 
     try {
       if (isEditing) {
-        payload = await cardsRepository.updateCard(payload);
+        payload = await cartsRepository.updateCart(payload);
       } else {
-        payload = await cardsRepository.createCard(payload);
+        payload = await cartsRepository.createCart(payload);
       }
 
       emitSuccess(payload);

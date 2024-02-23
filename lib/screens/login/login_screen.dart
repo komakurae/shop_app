@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
     final mainContainerWidth = screenSize.width * 0.85;
 
     return CustomFormBlocListener(

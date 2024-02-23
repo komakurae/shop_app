@@ -1,6 +1,6 @@
+import 'package:darq/darq.dart';
 import 'package:injectable/injectable.dart';
 import 'package:stx_bloc_base/stx_bloc_base.dart';
-import 'package:tuple/tuple.dart';
 
 import 'package:shop_app/models/product/models.dart';
 import 'package:shop_app/repositories/products_repository.dart';
@@ -34,17 +34,20 @@ class ProductsBloc
   }
 
   @override
-  Future<Tuple2<List<Product>, List<Category>>> onLoadWithExtraAsync() async {
+  Future<(List<Product>, List<Category>)> onLoadWithExtraAsync() async {
     final response = await Future.wait([
       repository.getAllProducts(),
       repository.getAllCategories(),
     ]);
 
-    return Tuple2(
+    return (
       response.first as List<Product>,
       response.last as List<Category>,
     );
   }
+
+  Product? getProductById(int id) =>
+      state.data.firstWhereOrDefault((product) => product.id == id);
 
   @override
   ProductsState onStateChanged(

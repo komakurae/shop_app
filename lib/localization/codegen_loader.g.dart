@@ -8,18 +8,7 @@ class CodegenLoader extends AssetLoader{
   Future<Map<String, dynamic>> load(String path, Locale locale ) {
     return Future.value(mapLocales[locale.toString()]);
   }
-  static const Map<String,dynamic> enUS = {
-  "screenText": "Screen",
-  "products": "Products",
-  "productsScreenTitle": "@:products @:screenText",
-  "cards": "Cards",
-  "settings": "Settings",
-  "settingsScreenTitle": "@:settings @:screenText",
-  "changePassword": "Change Password",
-  "languageName": "English",
-  "signOut": "Sign Out"
-};
-static const Map<String,dynamic> frFR = {
+  static const Map<String,dynamic> frFR = {
   "screenText": "Filtrer",
   "products": "Des produits",
   "productsScreenTitle": "@:products @:screenText",
@@ -30,7 +19,18 @@ static const Map<String,dynamic> frFR = {
   "languageName": "French",
   "signOut": "Se déconnecter"
 };
-static const Map<String, Map<String,dynamic>> mapLocales = {"en_US": enUS, "fr_FR": frFR};
-static const List<Locale> supportedLocales = [Locale("en", "US"), Locale("fr", "FR")];
-static const String path = "resources\langs";
+static const Map<String,dynamic> enUS = {
+  "screenText": "Screen",
+  "products": "Products",
+  "productsScreenTitle": "@:products @:screenText",
+  "cards": "Carts",
+  "settings": "Settings",
+  "settingsScreenTitle": "@:settings @:screenText",
+  "changePassword": "Change Password",
+  "languageName": "English",
+  "signOut": "Sign Out"
+};
+static const Map<String, Map<String,dynamic>> mapLocales = {"fr_FR": frFR, "en_US": enUS};
+static const List<Locale> supportedLocales = [Locale("fr", "FR"), Locale("en", "US")];
+static const String path = "resources/langs";
 }

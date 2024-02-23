@@ -6,8 +6,7 @@ import 'package:shop_app/localization/index.dart';
 import 'package:shop_app/models/index.dart';
 import 'package:shop_app/router/index.dart';
 import 'package:shop_app/screens/home/products/products_bloc.dart';
-import 'package:shop_app/screens/home/products/widgets/category_filter_dropdown_menu.dart';
-import 'package:shop_app/screens/home/products/widgets/product_item.dart';
+import 'widgets/index.dart';
 
 @RoutePage()
 class ProductsScreen extends StatelessWidget implements AutoRouteWrapper {
