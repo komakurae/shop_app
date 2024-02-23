@@ -71,6 +71,8 @@ dependencies:
   flutter_layout_grid: ^2.0.5
   tuple: ^2.0.2
 
+  #feature flag
+  flagsmith: ^5.0.1
 
   #other
   intl: ^0.18.1

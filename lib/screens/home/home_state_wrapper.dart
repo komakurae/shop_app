@@ -1,3 +1,4 @@
+import 'package:flagsmith/flagsmith.dart' as fs;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +13,20 @@ class HomeStateWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userEmail = context.read<AuthBloc>().state.userProfile.email;
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => getIt<FeatureFlagBloc>()
+            ..add(
+              FeatureFlagEvent.initialize(
+                featureName: Feature.cartsTab.id,
+                identity: fs.Identity(
+                  identifier: userEmail,
+                ),
+              ),
+            ),
+        ),
         BlocProvider(
           create: (context) => getIt<CartsBloc>(),
         ),

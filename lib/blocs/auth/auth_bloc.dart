@@ -38,7 +38,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event.status == AuthenticationStatus.authenticated) {
       try {
         // hardcoded value
-        final userProfile = await userRepository.getUserProfileById(1);
+        final userProfile = await userRepository.getUserProfileById(
+          2,
+        ); // for id = 1 feature disabled, for id = 2 enabled
 
         emit(AuthState.authenticated(userProfile));
       } catch (_) {

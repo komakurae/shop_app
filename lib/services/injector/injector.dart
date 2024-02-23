@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:shop_app/router/index.dart';
+import 'package:shop_app/services/index.dart';
 import 'injector.config.dart';
 
 final getIt = GetIt.instance;
@@ -11,10 +12,13 @@ final getIt = GetIt.instance;
   initializerName: 'init',
 )
 //register only auth dependencies
-void configureAuthDependencies() {
+Future<void> configureAuthDependencies() async {
+  final client = await FeatureFlagClient.init();
+
   getIt
     ..registerSingleton(AppRouter())
-    ..initAuthScope();
+    ..initAuthScope()
+    ..registerSingleton(client);
 }
 
 //register other dependencies (except auth ones)

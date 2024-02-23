@@ -18,6 +18,10 @@ args
 2.19
 file:///Users/admin/.pub-cache/hosted/pub.dev/args-2.4.2/
 file:///Users/admin/.pub-cache/hosted/pub.dev/args-2.4.2/lib/
+asn1lib
+3.0
+file:///Users/admin/.pub-cache/hosted/pub.dev/asn1lib-1.5.2/
+file:///Users/admin/.pub-cache/hosted/pub.dev/asn1lib-1.5.2/lib/
 async
 2.18
 file:///Users/admin/.pub-cache/hosted/pub.dev/async-2.11.0/
@@ -166,6 +170,10 @@ easy_logger
 2.12
 file:///Users/admin/.pub-cache/hosted/pub.dev/easy_logger-0.0.2/
 file:///Users/admin/.pub-cache/hosted/pub.dev/easy_logger-0.0.2/lib/
+encrypt
+2.18
+file:///Users/admin/.pub-cache/hosted/pub.dev/encrypt-5.0.3/
+file:///Users/admin/.pub-cache/hosted/pub.dev/encrypt-5.0.3/lib/
 equatable
 2.12
 file:///Users/admin/.pub-cache/hosted/pub.dev/equatable-2.0.5/
@@ -190,6 +198,14 @@ fixnum
 2.19
 file:///Users/admin/.pub-cache/hosted/pub.dev/fixnum-1.1.0/
 file:///Users/admin/.pub-cache/hosted/pub.dev/fixnum-1.1.0/lib/
+flagsmith
+2.13
+file:///Users/admin/.pub-cache/hosted/pub.dev/flagsmith-5.0.1/
+file:///Users/admin/.pub-cache/hosted/pub.dev/flagsmith-5.0.1/lib/
+flagsmith_flutter_core
+2.13
+file:///Users/admin/.pub-cache/hosted/pub.dev/flagsmith_flutter_core-3.0.0/
+file:///Users/admin/.pub-cache/hosted/pub.dev/flagsmith_flutter_core-3.0.0/lib/
 flutter_bloc
 2.12
 file:///Users/admin/.pub-cache/hosted/pub.dev/flutter_bloc-8.1.4/
@@ -198,6 +214,10 @@ flutter_cache_manager
 2.17
 file:///Users/admin/.pub-cache/hosted/pub.dev/flutter_cache_manager-3.3.1/
 file:///Users/admin/.pub-cache/hosted/pub.dev/flutter_cache_manager-3.3.1/lib/
+flutter_client_sse
+2.12
+file:///Users/admin/.pub-cache/hosted/pub.dev/flutter_client_sse-2.0.1/
+file:///Users/admin/.pub-cache/hosted/pub.dev/flutter_client_sse-2.0.1/lib/
 flutter_dotenv
 2.12
 file:///Users/admin/.pub-cache/hosted/pub.dev/flutter_dotenv-5.1.0/
