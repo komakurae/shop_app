@@ -4,6 +4,7 @@
     "productsScreenTitle": "@:products @:screenText",
     "cards": "Carts",
     "settings": "Settings",
+    "users": "Users",
     "settingsScreenTitle": "@:settings @:screenText",
     "changePassword": "Change Password",
     "languageName": "English",

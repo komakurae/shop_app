@@ -5,6 +5,7 @@ abstract class  LocaleKeys {
   static const productsScreenTitle = 'productsScreenTitle';
   static const cards = 'cards';
   static const settings = 'settings';
+  static const users = 'users';
   static const settingsScreenTitle = 'settingsScreenTitle';
   static const changePassword = 'changePassword';
   static const languageName = 'languageName';

@@ -18,7 +18,7 @@ part 'auth_state.dart';
 @Singleton(scope: 'auth')
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
-  final UserRepository userRepository;
+  final UsersRepository userRepository;
 
   final FeatureFlagBloc featureFlagBloc;
 

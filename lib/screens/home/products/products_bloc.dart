@@ -29,11 +29,6 @@ class ProductsBloc
   final ProductsRepository repository;
 
   @override
-  bool equals(Product item1, Product item2) {
-    return item1.id == item2.id;
-  }
-
-  @override
   Future<(List<Product>, List<Category>)> onLoadWithExtraAsync() async {
     final response = await Future.wait([
       repository.getAllProducts(),
@@ -71,5 +66,10 @@ class ProductsBloc
     }
 
     return state.copyWith(visibleData: visibleData);
+  }
+
+  @override
+  bool equals(Product item1, Product item2) {
+    return item1.id == item2.id;
   }
 }
