@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
 
     return BlocSelector<FeatureFlagBloc, FeatureFlagState, bool>(
       bloc: getIt<FeatureFlagBloc>(),
-      selector: (state) => state.isEnabled(Feature.cartsTab.featureName),
+      selector: (state) => state.isEnabled(FeatureFlag.cartsTab),
       builder: (context, isFeatureEnabled) {
         return AutoTabsScaffold(
           endDrawer: const AppDrawer(),

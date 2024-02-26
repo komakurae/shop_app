@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 import 'package:shop_app/blocs/feature_flag/feature_flag_bloc.dart';
 import 'package:shop_app/models/index.dart';
 import 'package:shop_app/repositories/index.dart';
-import 'package:shop_app/services/feature_flag/feature.dart';
+import 'package:shop_app/services/feature_flag/feature_flag.dart';
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
@@ -50,7 +50,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
         featureFlagBloc.add(
           FeatureFlagEvent.initialize(
-            featureName: Feature.cartsTab.featureName,
+            featureName: FeatureFlag.cartsTab.featureName,
             identity: fs.Identity(identifier: userProfile.email),
           ),
         );

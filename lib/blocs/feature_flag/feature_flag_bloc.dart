@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:shop_app/services/feature_flag/feature_flag_client.dart';
+import 'package:shop_app/services/index.dart';
 
 part 'feature_flag_event.dart';
 part 'feature_flag_state.dart';
@@ -65,7 +66,13 @@ class FeatureFlagBloc extends Bloc<FeatureFlagEvent, FeatureFlagState> {
     final newFlags = Map.fromEntries(state.flags.entries);
 
     for (final flag in result) {
-      newFlags[flag.feature.name] = flag.enabled ?? false;
+      final featureFlag = FeatureFlag.getFromString(flag.feature.name);
+
+      if (featureFlag == null) {
+        continue;
+      }
+
+      newFlags[featureFlag] = flag.enabled ?? featureFlag.isEnableByDefault;
     }
     emit(
       state.copyWith(

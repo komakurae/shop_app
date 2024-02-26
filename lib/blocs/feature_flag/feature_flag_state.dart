@@ -5,12 +5,14 @@ class FeatureFlagState with _$FeatureFlagState {
   const FeatureFlagState._();
 
   const factory FeatureFlagState({
-    @Default({}) Map<String, bool> flags,
+    @Default({}) Map<FeatureFlag, bool> flags,
     @Default(FeatureFlagStatus.loading) FeatureFlagStatus status,
     Identity? identity,
   }) = _FeatureFlagState;
 
-  bool isEnabled(String flagName) => flags[flagName] ?? false;
+  bool isEnabled(FeatureFlag featureFlag) {
+    return flags[featureFlag] ?? featureFlag.isEnableByDefault;
+  }
 }
 
 enum FeatureFlagStatus {

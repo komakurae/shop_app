@@ -690,7 +690,7 @@ abstract class _ChangeIdentity implements FeatureFlagEvent {
 
 /// @nodoc
 mixin _$FeatureFlagState {
-  Map<String, bool> get flags => throw _privateConstructorUsedError;
+  Map<FeatureFlag, bool> get flags => throw _privateConstructorUsedError;
   FeatureFlagStatus get status => throw _privateConstructorUsedError;
   Identity? get identity => throw _privateConstructorUsedError;
 
@@ -706,7 +706,9 @@ abstract class $FeatureFlagStateCopyWith<$Res> {
       _$FeatureFlagStateCopyWithImpl<$Res, FeatureFlagState>;
   @useResult
   $Res call(
-      {Map<String, bool> flags, FeatureFlagStatus status, Identity? identity});
+      {Map<FeatureFlag, bool> flags,
+      FeatureFlagStatus status,
+      Identity? identity});
 }
 
 /// @nodoc
@@ -730,7 +732,7 @@ class _$FeatureFlagStateCopyWithImpl<$Res, $Val extends FeatureFlagState>
       flags: null == flags
           ? _value.flags
           : flags // ignore: cast_nullable_to_non_nullable
-              as Map<String, bool>,
+              as Map<FeatureFlag, bool>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -752,7 +754,9 @@ abstract class _$$FeatureFlagStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Map<String, bool> flags, FeatureFlagStatus status, Identity? identity});
+      {Map<FeatureFlag, bool> flags,
+      FeatureFlagStatus status,
+      Identity? identity});
 }
 
 /// @nodoc
@@ -774,7 +778,7 @@ class __$$FeatureFlagStateImplCopyWithImpl<$Res>
       flags: null == flags
           ? _value._flags
           : flags // ignore: cast_nullable_to_non_nullable
-              as Map<String, bool>,
+              as Map<FeatureFlag, bool>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -791,16 +795,16 @@ class __$$FeatureFlagStateImplCopyWithImpl<$Res>
 
 class _$FeatureFlagStateImpl extends _FeatureFlagState {
   const _$FeatureFlagStateImpl(
-      {final Map<String, bool> flags = const {},
+      {final Map<FeatureFlag, bool> flags = const {},
       this.status = FeatureFlagStatus.loading,
       this.identity})
       : _flags = flags,
         super._();
 
-  final Map<String, bool> _flags;
+  final Map<FeatureFlag, bool> _flags;
   @override
   @JsonKey()
-  Map<String, bool> get flags {
+  Map<FeatureFlag, bool> get flags {
     if (_flags is EqualUnmodifiableMapView) return _flags;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_flags);
@@ -842,13 +846,13 @@ class _$FeatureFlagStateImpl extends _FeatureFlagState {
 
 abstract class _FeatureFlagState extends FeatureFlagState {
   const factory _FeatureFlagState(
-      {final Map<String, bool> flags,
+      {final Map<FeatureFlag, bool> flags,
       final FeatureFlagStatus status,
       final Identity? identity}) = _$FeatureFlagStateImpl;
   const _FeatureFlagState._() : super._();
 
   @override
-  Map<String, bool> get flags;
+  Map<FeatureFlag, bool> get flags;
   @override
   FeatureFlagStatus get status;
   @override
