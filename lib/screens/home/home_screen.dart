@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:shop_app/blocs/feature_flag/feature_flag_bloc.dart';
+import 'package:shop_app/blocs/index.dart';
 import 'package:shop_app/localization/index.dart';
 import 'package:shop_app/router/index.dart';
 import 'package:shop_app/services/index.dart';
@@ -24,6 +24,7 @@ class HomeScreen extends StatelessWidget {
           routes: [
             if (isFeatureEnabled) const CartsRoute(),
             const ProductsRoute(),
+            const UsersRoute(),
             const SettingsRoute(),
           ],
           bottomNavigationBuilder: (_, tabsRouter) {
@@ -50,6 +51,10 @@ class HomeScreen extends StatelessWidget {
                   BottomNavigationBarItem(
                     icon: const Icon(Icons.storefront),
                     label: LocaleKeys.products.tr(),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.groups),
+                    label: LocaleKeys.users.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: const Icon(Icons.settings),
