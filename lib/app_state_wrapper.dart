@@ -20,6 +20,9 @@ class AppStateWrapper extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<AuthBloc>(),
         ),
+        BlocProvider(
+          create: (context) => getIt<FeatureFlagBloc>(),
+        ),
       ],
       child: child,
     );

@@ -19,7 +19,7 @@ Future<void> initializeApp() async {
   await initializeLocalization();
   initializeCrashlytics();
   initializeBlocObserver();
-  configureAuthDependencies();
+  await configureAuthDependencies();
 }
 
 void initializeSplashScreen(WidgetsBinding widgetsBinding) {
