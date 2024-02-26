@@ -17,8 +17,8 @@ Future<void> configureAuthDependencies() async {
 
   getIt
     ..registerSingleton(AppRouter())
-    ..initAuthScope()
-    ..registerSingleton(client);
+    ..registerSingleton(client)
+    ..initAuthScope();
 }
 
 //register other dependencies (except auth ones)

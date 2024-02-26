@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:darq/darq.dart';
 import 'package:flagsmith/flagsmith.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -12,7 +11,7 @@ part 'feature_flag_event.dart';
 part 'feature_flag_state.dart';
 part 'feature_flag_bloc.freezed.dart';
 
-@singleton
+@Singleton(scope: 'auth')
 class FeatureFlagBloc extends Bloc<FeatureFlagEvent, FeatureFlagState> {
   final FeatureFlagClient featureFlagClient;
 
@@ -22,9 +21,9 @@ class FeatureFlagBloc extends Bloc<FeatureFlagEvent, FeatureFlagState> {
     required this.featureFlagClient,
   }) : super(const FeatureFlagState()) {
     on<_Initialize>(_onInitFlag);
-    on<_Fetch>(_onFetchFlag);
-    on<_Reload>(_onReloadFlag);
+    on<_Load>(_onLoadFlags);
     on<_Register>(_onRegisterFlag);
+    on<_ChangeIdentity>(_changeIdentityFlag);
   }
 
   @override
@@ -52,39 +51,26 @@ class FeatureFlagBloc extends Bloc<FeatureFlagEvent, FeatureFlagState> {
     );
   }
 
-  FutureOr<void> _onFetchFlag(
-    _Fetch event,
+  FutureOr<void> _onLoadFlags(
+    _Load event,
     Emitter<FeatureFlagState> emit,
   ) async {
     emit(state.copyWith(status: FeatureFlagStatus.loading));
 
     final result = await featureFlagClient.getFlags(
       user: state.identity,
+      reload: event.reload,
     );
 
+    final newFlags = Map.fromEntries(state.flags.entries);
+
+    for (final flag in result) {
+      newFlags[flag.feature.name] = flag.enabled ?? false;
+    }
     emit(
       state.copyWith(
         status: FeatureFlagStatus.complete,
-        flags: result,
-      ),
-    );
-  }
-
-  FutureOr<void> _onReloadFlag(
-    _Reload event,
-    Emitter<FeatureFlagState> emit,
-  ) async {
-    emit(state.copyWith(status: FeatureFlagStatus.loading));
-
-    final result = await featureFlagClient.getFlags(
-      reload: false,
-      user: state.identity,
-    );
-
-    emit(
-      state.copyWith(
-        status: FeatureFlagStatus.complete,
-        flags: result,
+        flags: newFlags,
       ),
     );
   }
@@ -95,8 +81,21 @@ class FeatureFlagBloc extends Bloc<FeatureFlagEvent, FeatureFlagState> {
   ) async {
     _subscription =
         featureFlagClient.stream(featureKey: event.featureName).listen((event) {
-      add(const _Reload());
+      add(const _Load(reload: false));
     });
-    add(const _Fetch());
+    add(const _Load());
+  }
+
+  FutureOr<void> _changeIdentityFlag(
+    _ChangeIdentity event,
+    Emitter<FeatureFlagState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        status: FeatureFlagStatus.loading,
+        identity: event.identity,
+      ),
+    );
+    add(const _Load());
   }
 }

@@ -1,9 +1,14 @@
 enum Feature {
-  cartsTab,
-}
+  cartsTab(
+    featureName: 'carts_tab',
+    isEnableByDefault: true,
+  );
 
-extension FeatureX on Feature {
-  String get id => switch (this) {
-        Feature.cartsTab => 'carts_tab',
-      };
+  const Feature({
+    required this.featureName,
+    required this.isEnableByDefault,
+  });
+
+  final String featureName;
+  final bool isEnableByDefault;
 }

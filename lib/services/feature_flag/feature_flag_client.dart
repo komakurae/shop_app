@@ -1,4 +1,5 @@
 import 'package:flagsmith/flagsmith.dart';
+
 import 'package:shop_app/core/constants/env_constants.dart';
 
 class FeatureFlagClient {
@@ -8,7 +9,6 @@ class FeatureFlagClient {
     _flagsmith = await FlagsmithClient.init(
       apiKey: EnvConstants.appFlagsmithKey,
     );
-    await _flagsmith.getFeatureFlags();
 
     return FeatureFlagClient();
   }
@@ -35,7 +35,7 @@ class FeatureFlagClient {
       );
 
   Future<List<Flag>> getFlags({
-    bool reload = true,
+    required bool reload,
     Identity? user,
   }) =>
       _flagsmith.getFeatureFlags(

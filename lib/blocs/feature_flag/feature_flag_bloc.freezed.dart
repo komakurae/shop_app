@@ -21,24 +21,24 @@ mixin _$FeatureFlagEvent {
     required TResult Function(String featureName, Identity? identity)
         initialize,
     required TResult Function(String featureName) register,
-    required TResult Function() fetch,
-    required TResult Function() reload,
+    required TResult Function(bool reload) load,
+    required TResult Function(Identity? identity) changeIdentity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String featureName, Identity? identity)? initialize,
     TResult? Function(String featureName)? register,
-    TResult? Function()? fetch,
-    TResult? Function()? reload,
+    TResult? Function(bool reload)? load,
+    TResult? Function(Identity? identity)? changeIdentity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String featureName, Identity? identity)? initialize,
     TResult Function(String featureName)? register,
-    TResult Function()? fetch,
-    TResult Function()? reload,
+    TResult Function(bool reload)? load,
+    TResult Function(Identity? identity)? changeIdentity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,24 +46,24 @@ mixin _$FeatureFlagEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Register value) register,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Reload value) reload,
+    required TResult Function(_Load value) load,
+    required TResult Function(_ChangeIdentity value) changeIdentity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Register value)? register,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Reload value)? reload,
+    TResult? Function(_Load value)? load,
+    TResult? Function(_ChangeIdentity value)? changeIdentity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Register value)? register,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Reload value)? reload,
+    TResult Function(_Load value)? load,
+    TResult Function(_ChangeIdentity value)? changeIdentity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -164,8 +164,8 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(String featureName, Identity? identity)
         initialize,
     required TResult Function(String featureName) register,
-    required TResult Function() fetch,
-    required TResult Function() reload,
+    required TResult Function(bool reload) load,
+    required TResult Function(Identity? identity) changeIdentity,
   }) {
     return initialize(featureName, identity);
   }
@@ -175,8 +175,8 @@ class _$InitializeImpl implements _Initialize {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String featureName, Identity? identity)? initialize,
     TResult? Function(String featureName)? register,
-    TResult? Function()? fetch,
-    TResult? Function()? reload,
+    TResult? Function(bool reload)? load,
+    TResult? Function(Identity? identity)? changeIdentity,
   }) {
     return initialize?.call(featureName, identity);
   }
@@ -186,8 +186,8 @@ class _$InitializeImpl implements _Initialize {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String featureName, Identity? identity)? initialize,
     TResult Function(String featureName)? register,
-    TResult Function()? fetch,
-    TResult Function()? reload,
+    TResult Function(bool reload)? load,
+    TResult Function(Identity? identity)? changeIdentity,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -201,8 +201,8 @@ class _$InitializeImpl implements _Initialize {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Register value) register,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Reload value) reload,
+    required TResult Function(_Load value) load,
+    required TResult Function(_ChangeIdentity value) changeIdentity,
   }) {
     return initialize(this);
   }
@@ -212,8 +212,8 @@ class _$InitializeImpl implements _Initialize {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Register value)? register,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Reload value)? reload,
+    TResult? Function(_Load value)? load,
+    TResult? Function(_ChangeIdentity value)? changeIdentity,
   }) {
     return initialize?.call(this);
   }
@@ -223,8 +223,8 @@ class _$InitializeImpl implements _Initialize {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Register value)? register,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Reload value)? reload,
+    TResult Function(_Load value)? load,
+    TResult Function(_ChangeIdentity value)? changeIdentity,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -314,8 +314,8 @@ class _$RegisterImpl implements _Register {
     required TResult Function(String featureName, Identity? identity)
         initialize,
     required TResult Function(String featureName) register,
-    required TResult Function() fetch,
-    required TResult Function() reload,
+    required TResult Function(bool reload) load,
+    required TResult Function(Identity? identity) changeIdentity,
   }) {
     return register(featureName);
   }
@@ -325,8 +325,8 @@ class _$RegisterImpl implements _Register {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String featureName, Identity? identity)? initialize,
     TResult? Function(String featureName)? register,
-    TResult? Function()? fetch,
-    TResult? Function()? reload,
+    TResult? Function(bool reload)? load,
+    TResult? Function(Identity? identity)? changeIdentity,
   }) {
     return register?.call(featureName);
   }
@@ -336,8 +336,8 @@ class _$RegisterImpl implements _Register {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String featureName, Identity? identity)? initialize,
     TResult Function(String featureName)? register,
-    TResult Function()? fetch,
-    TResult Function()? reload,
+    TResult Function(bool reload)? load,
+    TResult Function(Identity? identity)? changeIdentity,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -351,8 +351,8 @@ class _$RegisterImpl implements _Register {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Register value) register,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Reload value) reload,
+    required TResult Function(_Load value) load,
+    required TResult Function(_ChangeIdentity value) changeIdentity,
   }) {
     return register(this);
   }
@@ -362,8 +362,8 @@ class _$RegisterImpl implements _Register {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Register value)? register,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Reload value)? reload,
+    TResult? Function(_Load value)? load,
+    TResult? Function(_ChangeIdentity value)? changeIdentity,
   }) {
     return register?.call(this);
   }
@@ -373,8 +373,8 @@ class _$RegisterImpl implements _Register {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Register value)? register,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Reload value)? reload,
+    TResult Function(_Load value)? load,
+    TResult Function(_ChangeIdentity value)? changeIdentity,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -394,39 +394,65 @@ abstract class _Register implements FeatureFlagEvent {
 }
 
 /// @nodoc
-abstract class _$$FetchImplCopyWith<$Res> {
-  factory _$$FetchImplCopyWith(
-          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
-      __$$FetchImplCopyWithImpl<$Res>;
+abstract class _$$LoadImplCopyWith<$Res> {
+  factory _$$LoadImplCopyWith(
+          _$LoadImpl value, $Res Function(_$LoadImpl) then) =
+      __$$LoadImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool reload});
 }
 
 /// @nodoc
-class __$$FetchImplCopyWithImpl<$Res>
-    extends _$FeatureFlagEventCopyWithImpl<$Res, _$FetchImpl>
-    implements _$$FetchImplCopyWith<$Res> {
-  __$$FetchImplCopyWithImpl(
-      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
+class __$$LoadImplCopyWithImpl<$Res>
+    extends _$FeatureFlagEventCopyWithImpl<$Res, _$LoadImpl>
+    implements _$$LoadImplCopyWith<$Res> {
+  __$$LoadImplCopyWithImpl(_$LoadImpl _value, $Res Function(_$LoadImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? reload = null,
+  }) {
+    return _then(_$LoadImpl(
+      reload: null == reload
+          ? _value.reload
+          : reload // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$FetchImpl implements _Fetch {
-  const _$FetchImpl();
+class _$LoadImpl implements _Load {
+  const _$LoadImpl({this.reload = true});
+
+  @override
+  @JsonKey()
+  final bool reload;
 
   @override
   String toString() {
-    return 'FeatureFlagEvent.fetch()';
+    return 'FeatureFlagEvent.load(reload: $reload)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadImpl &&
+            (identical(other.reload, reload) || other.reload == reload));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, reload);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadImplCopyWith<_$LoadImpl> get copyWith =>
+      __$$LoadImplCopyWithImpl<_$LoadImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -434,10 +460,10 @@ class _$FetchImpl implements _Fetch {
     required TResult Function(String featureName, Identity? identity)
         initialize,
     required TResult Function(String featureName) register,
-    required TResult Function() fetch,
-    required TResult Function() reload,
+    required TResult Function(bool reload) load,
+    required TResult Function(Identity? identity) changeIdentity,
   }) {
-    return fetch();
+    return load(reload);
   }
 
   @override
@@ -445,10 +471,10 @@ class _$FetchImpl implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String featureName, Identity? identity)? initialize,
     TResult? Function(String featureName)? register,
-    TResult? Function()? fetch,
-    TResult? Function()? reload,
+    TResult? Function(bool reload)? load,
+    TResult? Function(Identity? identity)? changeIdentity,
   }) {
-    return fetch?.call();
+    return load?.call(reload);
   }
 
   @override
@@ -456,12 +482,12 @@ class _$FetchImpl implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String featureName, Identity? identity)? initialize,
     TResult Function(String featureName)? register,
-    TResult Function()? fetch,
-    TResult Function()? reload,
+    TResult Function(bool reload)? load,
+    TResult Function(Identity? identity)? changeIdentity,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch();
+    if (load != null) {
+      return load(reload);
     }
     return orElse();
   }
@@ -471,10 +497,10 @@ class _$FetchImpl implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Register value) register,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Reload value) reload,
+    required TResult Function(_Load value) load,
+    required TResult Function(_ChangeIdentity value) changeIdentity,
   }) {
-    return fetch(this);
+    return load(this);
   }
 
   @override
@@ -482,10 +508,10 @@ class _$FetchImpl implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Register value)? register,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Reload value)? reload,
+    TResult? Function(_Load value)? load,
+    TResult? Function(_ChangeIdentity value)? changeIdentity,
   }) {
-    return fetch?.call(this);
+    return load?.call(this);
   }
 
   @override
@@ -493,55 +519,88 @@ class _$FetchImpl implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Register value)? register,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Reload value)? reload,
+    TResult Function(_Load value)? load,
+    TResult Function(_ChangeIdentity value)? changeIdentity,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(this);
+    if (load != null) {
+      return load(this);
     }
     return orElse();
   }
 }
 
-abstract class _Fetch implements FeatureFlagEvent {
-  const factory _Fetch() = _$FetchImpl;
+abstract class _Load implements FeatureFlagEvent {
+  const factory _Load({final bool reload}) = _$LoadImpl;
+
+  bool get reload;
+  @JsonKey(ignore: true)
+  _$$LoadImplCopyWith<_$LoadImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ReloadImplCopyWith<$Res> {
-  factory _$$ReloadImplCopyWith(
-          _$ReloadImpl value, $Res Function(_$ReloadImpl) then) =
-      __$$ReloadImplCopyWithImpl<$Res>;
+abstract class _$$ChangeIdentityImplCopyWith<$Res> {
+  factory _$$ChangeIdentityImplCopyWith(_$ChangeIdentityImpl value,
+          $Res Function(_$ChangeIdentityImpl) then) =
+      __$$ChangeIdentityImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Identity? identity});
 }
 
 /// @nodoc
-class __$$ReloadImplCopyWithImpl<$Res>
-    extends _$FeatureFlagEventCopyWithImpl<$Res, _$ReloadImpl>
-    implements _$$ReloadImplCopyWith<$Res> {
-  __$$ReloadImplCopyWithImpl(
-      _$ReloadImpl _value, $Res Function(_$ReloadImpl) _then)
+class __$$ChangeIdentityImplCopyWithImpl<$Res>
+    extends _$FeatureFlagEventCopyWithImpl<$Res, _$ChangeIdentityImpl>
+    implements _$$ChangeIdentityImplCopyWith<$Res> {
+  __$$ChangeIdentityImplCopyWithImpl(
+      _$ChangeIdentityImpl _value, $Res Function(_$ChangeIdentityImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? identity = freezed,
+  }) {
+    return _then(_$ChangeIdentityImpl(
+      identity: freezed == identity
+          ? _value.identity
+          : identity // ignore: cast_nullable_to_non_nullable
+              as Identity?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$ReloadImpl implements _Reload {
-  const _$ReloadImpl();
+class _$ChangeIdentityImpl implements _ChangeIdentity {
+  const _$ChangeIdentityImpl({this.identity});
+
+  @override
+  final Identity? identity;
 
   @override
   String toString() {
-    return 'FeatureFlagEvent.reload()';
+    return 'FeatureFlagEvent.changeIdentity(identity: $identity)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ReloadImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeIdentityImpl &&
+            (identical(other.identity, identity) ||
+                other.identity == identity));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, identity);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangeIdentityImplCopyWith<_$ChangeIdentityImpl> get copyWith =>
+      __$$ChangeIdentityImplCopyWithImpl<_$ChangeIdentityImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -549,10 +608,10 @@ class _$ReloadImpl implements _Reload {
     required TResult Function(String featureName, Identity? identity)
         initialize,
     required TResult Function(String featureName) register,
-    required TResult Function() fetch,
-    required TResult Function() reload,
+    required TResult Function(bool reload) load,
+    required TResult Function(Identity? identity) changeIdentity,
   }) {
-    return reload();
+    return changeIdentity(identity);
   }
 
   @override
@@ -560,10 +619,10 @@ class _$ReloadImpl implements _Reload {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String featureName, Identity? identity)? initialize,
     TResult? Function(String featureName)? register,
-    TResult? Function()? fetch,
-    TResult? Function()? reload,
+    TResult? Function(bool reload)? load,
+    TResult? Function(Identity? identity)? changeIdentity,
   }) {
-    return reload?.call();
+    return changeIdentity?.call(identity);
   }
 
   @override
@@ -571,12 +630,12 @@ class _$ReloadImpl implements _Reload {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String featureName, Identity? identity)? initialize,
     TResult Function(String featureName)? register,
-    TResult Function()? fetch,
-    TResult Function()? reload,
+    TResult Function(bool reload)? load,
+    TResult Function(Identity? identity)? changeIdentity,
     required TResult orElse(),
   }) {
-    if (reload != null) {
-      return reload();
+    if (changeIdentity != null) {
+      return changeIdentity(identity);
     }
     return orElse();
   }
@@ -586,10 +645,10 @@ class _$ReloadImpl implements _Reload {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Register value) register,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Reload value) reload,
+    required TResult Function(_Load value) load,
+    required TResult Function(_ChangeIdentity value) changeIdentity,
   }) {
-    return reload(this);
+    return changeIdentity(this);
   }
 
   @override
@@ -597,10 +656,10 @@ class _$ReloadImpl implements _Reload {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Register value)? register,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Reload value)? reload,
+    TResult? Function(_Load value)? load,
+    TResult? Function(_ChangeIdentity value)? changeIdentity,
   }) {
-    return reload?.call(this);
+    return changeIdentity?.call(this);
   }
 
   @override
@@ -608,24 +667,30 @@ class _$ReloadImpl implements _Reload {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Register value)? register,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Reload value)? reload,
+    TResult Function(_Load value)? load,
+    TResult Function(_ChangeIdentity value)? changeIdentity,
     required TResult orElse(),
   }) {
-    if (reload != null) {
-      return reload(this);
+    if (changeIdentity != null) {
+      return changeIdentity(this);
     }
     return orElse();
   }
 }
 
-abstract class _Reload implements FeatureFlagEvent {
-  const factory _Reload() = _$ReloadImpl;
+abstract class _ChangeIdentity implements FeatureFlagEvent {
+  const factory _ChangeIdentity({final Identity? identity}) =
+      _$ChangeIdentityImpl;
+
+  Identity? get identity;
+  @JsonKey(ignore: true)
+  _$$ChangeIdentityImplCopyWith<_$ChangeIdentityImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$FeatureFlagState {
-  List<Flag> get flags => throw _privateConstructorUsedError;
+  Map<String, bool> get flags => throw _privateConstructorUsedError;
   FeatureFlagStatus get status => throw _privateConstructorUsedError;
   Identity? get identity => throw _privateConstructorUsedError;
 
@@ -640,7 +705,8 @@ abstract class $FeatureFlagStateCopyWith<$Res> {
           FeatureFlagState value, $Res Function(FeatureFlagState) then) =
       _$FeatureFlagStateCopyWithImpl<$Res, FeatureFlagState>;
   @useResult
-  $Res call({List<Flag> flags, FeatureFlagStatus status, Identity? identity});
+  $Res call(
+      {Map<String, bool> flags, FeatureFlagStatus status, Identity? identity});
 }
 
 /// @nodoc
@@ -664,7 +730,7 @@ class _$FeatureFlagStateCopyWithImpl<$Res, $Val extends FeatureFlagState>
       flags: null == flags
           ? _value.flags
           : flags // ignore: cast_nullable_to_non_nullable
-              as List<Flag>,
+              as Map<String, bool>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -685,7 +751,8 @@ abstract class _$$FeatureFlagStateImplCopyWith<$Res>
       __$$FeatureFlagStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Flag> flags, FeatureFlagStatus status, Identity? identity});
+  $Res call(
+      {Map<String, bool> flags, FeatureFlagStatus status, Identity? identity});
 }
 
 /// @nodoc
@@ -707,7 +774,7 @@ class __$$FeatureFlagStateImplCopyWithImpl<$Res>
       flags: null == flags
           ? _value._flags
           : flags // ignore: cast_nullable_to_non_nullable
-              as List<Flag>,
+              as Map<String, bool>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -724,19 +791,19 @@ class __$$FeatureFlagStateImplCopyWithImpl<$Res>
 
 class _$FeatureFlagStateImpl extends _FeatureFlagState {
   const _$FeatureFlagStateImpl(
-      {final List<Flag> flags = const [],
+      {final Map<String, bool> flags = const {},
       this.status = FeatureFlagStatus.loading,
       this.identity})
       : _flags = flags,
         super._();
 
-  final List<Flag> _flags;
+  final Map<String, bool> _flags;
   @override
   @JsonKey()
-  List<Flag> get flags {
-    if (_flags is EqualUnmodifiableListView) return _flags;
+  Map<String, bool> get flags {
+    if (_flags is EqualUnmodifiableMapView) return _flags;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_flags);
+    return EqualUnmodifiableMapView(_flags);
   }
 
   @override
@@ -775,13 +842,13 @@ class _$FeatureFlagStateImpl extends _FeatureFlagState {
 
 abstract class _FeatureFlagState extends FeatureFlagState {
   const factory _FeatureFlagState(
-      {final List<Flag> flags,
+      {final Map<String, bool> flags,
       final FeatureFlagStatus status,
       final Identity? identity}) = _$FeatureFlagStateImpl;
   const _FeatureFlagState._() : super._();
 
   @override
-  List<Flag> get flags;
+  Map<String, bool> get flags;
   @override
   FeatureFlagStatus get status;
   @override

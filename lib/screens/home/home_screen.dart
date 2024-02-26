@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/blocs/feature_flag/feature_flag_bloc.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:shop_app/blocs/feature_flag/feature_flag_bloc.dart';
 import 'package:shop_app/localization/index.dart';
 import 'package:shop_app/router/index.dart';
 import 'package:shop_app/services/index.dart';
@@ -15,9 +16,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     EasyLocalization.of(context);
 
-    return BlocBuilder<FeatureFlagBloc, FeatureFlagState>(
-      builder: (context, state) {
-        final isFeatureEnabled = state.isEnabled(Feature.cartsTab.id);
+    return BlocSelector<FeatureFlagBloc, FeatureFlagState, bool>(
+      bloc: getIt<FeatureFlagBloc>(),
+      selector: (state) => state.isEnabled(Feature.cartsTab.featureName),
+      builder: (context, isFeatureEnabled) {
         return AutoTabsScaffold(
           endDrawer: const AppDrawer(),
           routes: [

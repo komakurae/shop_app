@@ -9,6 +9,11 @@ class FeatureFlagEvent with _$FeatureFlagEvent {
   const factory FeatureFlagEvent.register({
     required String featureName,
   }) = _Register;
-  const factory FeatureFlagEvent.fetch() = _Fetch;
-  const factory FeatureFlagEvent.reload() = _Reload;
+  const factory FeatureFlagEvent.load({
+    @Default(true) bool reload,
+  }) = _Load;
+
+  const factory FeatureFlagEvent.changeIdentity({
+    Identity? identity,
+  }) = _ChangeIdentity;
 }
