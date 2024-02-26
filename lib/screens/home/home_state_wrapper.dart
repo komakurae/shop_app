@@ -15,9 +15,6 @@ class HomeStateWrapper extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<FeatureFlagBloc>(),
-        ),
-        BlocProvider(
           create: (context) => getIt<CartsBloc>(),
         ),
         BlocProvider(

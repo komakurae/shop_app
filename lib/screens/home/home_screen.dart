@@ -17,7 +17,6 @@ class HomeScreen extends StatelessWidget {
     EasyLocalization.of(context);
 
     return BlocSelector<FeatureFlagBloc, FeatureFlagState, bool>(
-      bloc: getIt<FeatureFlagBloc>(),
       selector: (state) => state.isEnabled(FeatureFlag.cartsTab),
       builder: (context, isFeatureEnabled) {
         return AutoTabsScaffold(

@@ -45,7 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         // hardcoded value
         final userProfile = await userRepository.getUserProfileById(
-          1,
+          2,
         ); // for id = 1 feature disabled, for id = 2 enabled
 
         featureFlagBloc.add(
@@ -53,6 +53,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             featureName: FeatureFlag.cartsTab.featureName,
             identity: fs.Identity(identifier: userProfile.email),
           ),
+        );
+
+        await featureFlagBloc.stream.firstWhere(
+          (state) => state.status == FeatureFlagStatus.complete,
         );
 
         emit(AuthState.authenticated(userProfile));
