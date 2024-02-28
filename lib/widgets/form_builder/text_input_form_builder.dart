@@ -13,8 +13,10 @@ class TextInputFormBuilder extends StatefulWidget {
     this.label = '',
     this.hintText,
     this.isObscureText = false,
+    this.readOnly = false,
     this.fieldFocusNode,
     this.nextFieldFocusNode,
+    this.onTap,
     this.onSubmit,
     required this.fieldBloc,
   });
@@ -22,8 +24,10 @@ class TextInputFormBuilder extends StatefulWidget {
   final String label;
   final String? hintText;
   final bool isObscureText;
+  final bool readOnly;
   final FocusNode? fieldFocusNode;
   final FocusNode? nextFieldFocusNode;
+  final VoidCallback? onTap;
   final VoidCallback? onSubmit;
   final TextFieldBloc fieldBloc;
 
@@ -71,6 +75,8 @@ class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
             focusNode: widget.fieldFocusNode,
             obscureText: widget.isObscureText,
             onChanged: (value) => widget.fieldBloc.changeValue(value),
+            readOnly: widget.readOnly,
+            onTap: widget.onTap,
             onSubmitted: (value) {
               widget.nextFieldFocusNode?.requestFocus();
               widget.onSubmit?.call();

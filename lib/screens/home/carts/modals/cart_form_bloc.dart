@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:injectable/injectable.dart';
+import 'package:shop_app/blocs/index.dart';
+import 'package:shop_app/models/index.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 
-import 'package:shop_app/models/cart/models.dart';
-import 'package:shop_app/models/product/models.dart';
 import 'package:shop_app/repositories/carts_repository.dart';
 import 'package:shop_app/repositories/index.dart';
 import 'package:shop_app/screens/home/carts/carts_bloc.dart';
@@ -13,23 +13,30 @@ import 'package:shop_app/screens/home/carts/carts_bloc.dart';
 class CartFormBloc extends FormBloc<Cart, String> {
   late final DateTimeFieldBloc dateTime;
   late final ListFieldBloc<Product> products;
+  late final SelectFieldBloc<UserProfile> users;
 
   final Cart? initial;
   final CartsBloc cartsBloc;
   final CartsRepository cartsRepository;
   final ProductsRepository productsRepository;
+  final UsersRepository usersRepository;
 
   CartFormBloc({
     @factoryParam this.initial,
     required this.cartsBloc,
     required this.cartsRepository,
     required this.productsRepository,
+    required this.usersRepository,
   }) : super(isEditing: initial != null) {
     dateTime = DateTimeFieldBloc(
       initialValue: initial?.date,
       required: true,
     );
     products = ListFieldBloc();
+
+    users = SelectFieldBloc(
+      required: true,
+    );
 
     addFields([
       dateTime,
@@ -43,17 +50,24 @@ class CartFormBloc extends FormBloc<Cart, String> {
 
     try {
       final productsData = await productsRepository.getAllProducts();
+      final usersData = await usersRepository.getAllUsers();
 
       final hashedProducts = {
         for (final product in productsData) product.id: product,
       };
 
-      products.extraData = hashedProducts;
+      products.changeExtraData(hashedProducts);
+      users.addOptions(usersData);
 
-      if (initial != null) {
+      if (isEditing) {
         final cartProductsWithDetails = initial!.products
             .map((productCart) => hashedProducts[productCart.productId]!)
             .toList();
+
+        final cartUser =
+            await usersRepository.getUserProfileById(initial!.userId);
+
+        users.updateInitial(cartUser);
 
         products.value = cartProductsWithDetails;
       }
@@ -72,6 +86,7 @@ class CartFormBloc extends FormBloc<Cart, String> {
 
     var payload = (initial ?? const Cart()).copyWith(
       date: dateTime.value,
+      userId: users.value!.id,
     );
 
     try {

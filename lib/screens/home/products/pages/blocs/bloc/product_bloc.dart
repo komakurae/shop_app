@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
 
 import 'package:shop_app/models/index.dart';
-import 'package:shop_app/models/product/models.dart';
 import 'package:shop_app/repositories/index.dart';
 
 typedef ProductState = NetworkState<Product>;

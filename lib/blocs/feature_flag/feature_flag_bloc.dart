@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:shop_app/services/feature_flag/feature_flag_client.dart';
 import 'package:shop_app/services/index.dart';
 
 part 'feature_flag_event.dart';

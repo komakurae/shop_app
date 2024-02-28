@@ -92,6 +92,7 @@ extension GetItInjectableX on _i1.GetIt {
           cartsBloc: gh<_i15.CartsBloc>(),
           cartsRepository: gh<_i12.CartsRepository>(),
           productsRepository: gh<_i9.ProductsRepository>(),
+          usersRepository: gh<_i9.UsersRepository>(),
         ));
     return this;
   }
