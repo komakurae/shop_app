@@ -114,7 +114,7 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
                             .map(
                               (cart) => GestureDetector(
                                 onTap: () {
-                                  context.router.push(
+                                  context.pushRoute(
                                     CartsFormRoute(cart: cart),
                                   );
                                 },

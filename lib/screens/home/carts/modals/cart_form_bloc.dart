@@ -1,13 +1,11 @@
 import 'dart:async';
 
 import 'package:injectable/injectable.dart';
-import 'package:shop_app/blocs/index.dart';
-import 'package:shop_app/models/index.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 
+import 'package:shop_app/blocs/index.dart';
+import 'package:shop_app/models/index.dart';
 import 'package:shop_app/repositories/carts_repository.dart';
-import 'package:shop_app/repositories/index.dart';
-import 'package:shop_app/screens/home/carts/carts_bloc.dart';
 
 @injectable
 class CartFormBloc extends FormBloc<Cart, String> {
@@ -17,16 +15,17 @@ class CartFormBloc extends FormBloc<Cart, String> {
 
   final Cart? initial;
   final CartsBloc cartsBloc;
-  final CartsRepository cartsRepository;
-  final ProductsRepository productsRepository;
-  final UsersRepository usersRepository;
+  final UsersBloc usersBloc;
+  final ProductsBloc productsBloc;
+
+  final CartsRepository repository;
 
   CartFormBloc({
     @factoryParam this.initial,
     required this.cartsBloc,
-    required this.cartsRepository,
-    required this.productsRepository,
-    required this.usersRepository,
+    required this.usersBloc,
+    required this.productsBloc,
+    required this.repository,
   }) : super(isEditing: initial != null) {
     dateTime = DateTimeFieldBloc(
       initialValue: initial?.date,
@@ -49,15 +48,22 @@ class CartFormBloc extends FormBloc<Cart, String> {
     emitLoading();
 
     try {
-      final productsData = await productsRepository.getAllProducts();
-      final usersData = await usersRepository.getAllUsers();
+      await Future.wait(
+        [
+          usersBloc.initLoadAsyncFuture(),
+          productsBloc.initLoadAsyncFuture(),
+        ],
+      );
+
+      final usersList = usersBloc.state.data;
+      final productsList = productsBloc.state.data;
 
       final hashedProducts = {
-        for (final product in productsData) product.id: product,
+        for (final product in productsList) product.id: product,
       };
 
       products.changeExtraData(hashedProducts);
-      users.addOptions(usersData);
+      users.addOptions(usersList);
 
       if (isEditing) {
         final cartProductsWithDetails = initial!.products
@@ -65,7 +71,7 @@ class CartFormBloc extends FormBloc<Cart, String> {
             .toList();
 
         final cartUser =
-            await usersRepository.getUserProfileById(initial!.userId);
+            usersList.firstWhere((user) => user.id == initial!.userId);
 
         users.updateInitial(cartUser);
 
@@ -91,9 +97,11 @@ class CartFormBloc extends FormBloc<Cart, String> {
 
     try {
       if (isEditing) {
-        payload = await cartsRepository.updateCart(payload);
+        payload = await repository.updateCart(payload);
+        cartsBloc.editItemAsync(payload);
       } else {
-        payload = await cartsRepository.createCart(payload);
+        payload = await repository.createCart(payload);
+        cartsBloc.addItemAsync(payload);
       }
 
       emitSuccess(payload);

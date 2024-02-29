@@ -13,7 +13,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:shop_app/blocs/auth/auth_bloc.dart' as _i8;
 import 'package:shop_app/blocs/feature_flag/feature_flag_bloc.dart' as _i3;
 import 'package:shop_app/blocs/index.dart' as _i11;
-import 'package:shop_app/models/cart/models.dart' as _i19;
+import 'package:shop_app/models/index.dart' as _i19;
 import 'package:shop_app/repositories/auth_repository.dart' as _i7;
 import 'package:shop_app/repositories/carts_repository.dart' as _i12;
 import 'package:shop_app/repositories/index.dart' as _i9;
@@ -26,8 +26,8 @@ import 'package:shop_app/screens/home/products/pages/blocs/bloc/product_bloc.dar
 import 'package:shop_app/screens/home/products/products_bloc.dart' as _i17;
 import 'package:shop_app/screens/home/users/users_bloc.dart' as _i14;
 import 'package:shop_app/screens/login/login_form_bloc.dart' as _i10;
-import 'package:shop_app/services/feature_flag/feature_flag_client.dart' as _i4;
 import 'package:shop_app/services/http/http_client.dart' as _i5;
+import 'package:shop_app/services/index.dart' as _i4;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of auth-scope dependencies inside of GetIt
@@ -89,10 +89,10 @@ extension GetItInjectableX on _i1.GetIt {
     ) =>
         _i18.CartFormBloc(
           initial: initial,
-          cartsBloc: gh<_i15.CartsBloc>(),
-          cartsRepository: gh<_i12.CartsRepository>(),
-          productsRepository: gh<_i9.ProductsRepository>(),
-          usersRepository: gh<_i9.UsersRepository>(),
+          cartsBloc: gh<_i11.CartsBloc>(),
+          usersBloc: gh<_i11.UsersBloc>(),
+          productsBloc: gh<_i11.ProductsBloc>(),
+          repository: gh<_i12.CartsRepository>(),
         ));
     return this;
   }

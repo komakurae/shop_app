@@ -15,7 +15,7 @@ import 'package:shop_app/screens/auth_screen.dart' as _i1;
 import 'package:shop_app/screens/home/carts/carts_screen.dart' as _i3;
 import 'package:shop_app/screens/home/carts/modals/cart_form_screen.dart'
     as _i2;
-import 'package:shop_app/screens/home/carts/modals/select_user_screen.dart'
+import 'package:shop_app/screens/home/carts/modals/select_user/select_user_screen.dart'
     as _i10;
 import 'package:shop_app/screens/home/home_screen.dart' as _i4;
 import 'package:shop_app/screens/home/home_wrapper.dart' as _i5;
@@ -102,7 +102,7 @@ abstract class $AppRouter extends _i13.RootStackRouter {
     SelectUserRoute.name: (routeData) {
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.SelectUserScreen(),
+        child: _i13.WrappedRoute(child: const _i10.SelectUserScreen()),
       );
     },
     SettingsRoute.name: (routeData) {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/models/index.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 
 import 'package:shop_app/models/cart/models.dart' as models;
+import 'package:shop_app/models/index.dart';
 import 'package:shop_app/router/index.dart';
-import 'package:shop_app/screens/home/carts/carts_bloc.dart';
 import 'package:shop_app/screens/home/carts/modals/cart_form_bloc.dart';
 import 'package:shop_app/screens/home/products/widgets/product_item.dart';
 import 'package:shop_app/services/index.dart';
@@ -29,16 +29,12 @@ class CartsFormScreen extends StatelessWidget implements AutoRouteWrapper {
       create: (context) => formBloc..initialize(),
       child: CustomFormBlocListener(
         formBloc: formBloc,
-        onCancel: (context, state) => context.router.pop(),
-        onSuccess: (context, state) {
-          final cartsBloc = context.read<CartsBloc>();
-
-          if (state.isEditing) {
-            cartsBloc.editItem(state.response! as models.Cart);
-          } else {
-            cartsBloc.addItem(state.response! as models.Cart);
-          }
-          context.router.pop();
+        onCancel: (context, state) => context.popRoute(),
+        onSuccess: (context, state) => context.popRoute(),
+        onFailure: (context, state) {
+          FlushbarHelper.createError(
+            message: '${state.error}',
+          ).show(context);
         },
         child: this,
       ),
@@ -72,7 +68,7 @@ class CartsFormScreen extends StatelessWidget implements AutoRouteWrapper {
           ),
           GestureDetector(
             onTap: () async {
-              final user = (await context.router.push(
+              final user = (await context.pushRoute(
                 const SelectUserRoute(),
               )) as UserProfile?;
               formBloc.users.changeValue(user);

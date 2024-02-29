@@ -21,8 +21,18 @@ class CartsBloc
   final CartsRepository repository;
 
   @override
-  bool equals(Cart item1, Cart item2) {
-    return item1.id == item2.id;
+  Future<List<Cart>> onLoadAsync() {
+    return repository.getAllCarts();
+  }
+
+  @override
+  Future<Cart> onAddItemAsync(Cart newItem) {
+    return repository.createCart(newItem);
+  }
+
+  @override
+  Future<Cart> onEditItemAsync(Cart updatedItem) {
+    return repository.updateCart(updatedItem);
   }
 
   @override
@@ -31,7 +41,7 @@ class CartsBloc
   }
 
   @override
-  Future<List<Cart>> onLoadAsync() {
-    return repository.getAllCarts();
+  bool equals(Cart item1, Cart item2) {
+    return item1.id == item2.id;
   }
 }
