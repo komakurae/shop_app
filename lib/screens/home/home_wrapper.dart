@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:shop_app/blocs/index.dart';
 import 'package:shop_app/router/index.dart';
 import 'package:shop_app/services/index.dart';
 import 'home_state_wrapper.dart';
@@ -17,7 +18,10 @@ class _HomeWrapperScreenState extends State<HomeWrapperScreen> {
   void initState() {
     super.initState();
 
-    getIt.pushNewScope(init: configureUserDependencies);
+    getIt.pushNewScope(
+      init: (getIt) async =>
+          configureUserDependencies(getIt<AuthBloc>().state.userProfile),
+    );
   }
 
   @override

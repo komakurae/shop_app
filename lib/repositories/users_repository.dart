@@ -4,6 +4,7 @@ import 'package:shop_app/models/index.dart';
 import 'package:shop_app/services/http/http_client.dart';
 import 'package:shop_app/services/index.dart';
 
+@Environment('me')
 @Injectable(scope: 'auth')
 class UsersRepository {
   final HttpClient httpClient;
