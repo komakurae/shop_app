@@ -13,7 +13,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:shop_app/blocs/auth/auth_bloc.dart' as _i8;
 import 'package:shop_app/blocs/feature_flag/feature_flag_bloc.dart' as _i3;
 import 'package:shop_app/blocs/index.dart' as _i11;
-import 'package:shop_app/models/index.dart' as _i19;
+import 'package:shop_app/models/index.dart' as _i20;
 import 'package:shop_app/repositories/auth_repository.dart' as _i7;
 import 'package:shop_app/repositories/carts_repository.dart' as _i12;
 import 'package:shop_app/repositories/index.dart' as _i9;
@@ -29,6 +29,9 @@ import 'package:shop_app/screens/home/users/users_bloc.dart' as _i15;
 import 'package:shop_app/screens/login/login_form_bloc.dart' as _i10;
 import 'package:shop_app/services/http/http_client.dart' as _i5;
 import 'package:shop_app/services/index.dart' as _i4;
+
+const String _me = 'me';
+const String _userMode = 'userMode';
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of auth-scope dependencies inside of GetIt
