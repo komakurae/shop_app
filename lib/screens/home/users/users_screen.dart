@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shop_app/router/index.dart';
-import 'package:shop_app/router/router.gr.dart';
 import 'package:shop_app/screens/home/users/users_bloc.dart';
 import 'package:shop_app/services/index.dart';
 
@@ -80,7 +79,7 @@ class UsersScreen extends StatelessWidget implements AutoRouteWrapper {
                         );
 
                         await context.router.push(
-                          CartsFormRoute(),
+                          const UserCartsRoute(),
                         );
 
                         await getIt.popScope();

@@ -36,7 +36,6 @@ Future<void> configureUserDependencies(
       ..unregister<EnvironmentFilter>(instanceName: kEnvironmentsFilterName)
       ..unregister<Set<String>>(instanceName: kEnvironmentsName);
   }
-  prints('before registration');
 
   getIt
     ..init(environment: 'me')

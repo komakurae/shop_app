@@ -10,15 +10,15 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:shop_app/blocs/auth/auth_bloc.dart' as _i10;
+import 'package:shop_app/blocs/auth/auth_bloc.dart' as _i8;
 import 'package:shop_app/blocs/feature_flag/feature_flag_bloc.dart' as _i3;
-import 'package:shop_app/blocs/index.dart' as _i12;
+import 'package:shop_app/blocs/index.dart' as _i11;
 import 'package:shop_app/models/cart/models.dart' as _i20;
-import 'package:shop_app/repositories/auth_repository.dart' as _i9;
-import 'package:shop_app/repositories/carts_repository.dart' as _i13;
-import 'package:shop_app/repositories/index.dart' as _i7;
+import 'package:shop_app/repositories/auth_repository.dart' as _i7;
+import 'package:shop_app/repositories/carts_repository.dart' as _i12;
+import 'package:shop_app/repositories/index.dart' as _i9;
 import 'package:shop_app/repositories/products_repository.dart' as _i14;
-import 'package:shop_app/repositories/users_carts_repository.dart' as _i8;
+import 'package:shop_app/repositories/users_carts_repository.dart' as _i13;
 import 'package:shop_app/repositories/users_repository.dart' as _i6;
 import 'package:shop_app/screens/home/carts/carts_bloc.dart' as _i16;
 import 'package:shop_app/screens/home/carts/modals/cart_form_bloc.dart' as _i19;
@@ -26,7 +26,7 @@ import 'package:shop_app/screens/home/products/pages/blocs/bloc/product_bloc.dar
     as _i17;
 import 'package:shop_app/screens/home/products/products_bloc.dart' as _i18;
 import 'package:shop_app/screens/home/users/users_bloc.dart' as _i15;
-import 'package:shop_app/screens/login/login_form_bloc.dart' as _i11;
+import 'package:shop_app/screens/login/login_form_bloc.dart' as _i10;
 import 'package:shop_app/services/http/http_client.dart' as _i5;
 import 'package:shop_app/services/index.dart' as _i4;
 
@@ -44,23 +44,17 @@ extension GetItInjectableX on _i1.GetIt {
             featureFlagClient: gh<_i4.FeatureFlagClient>()));
         gh.singleton<_i5.HttpClient>(_i5.HttpClient());
         gh.factory<_i6.UsersRepository>(
-          () => _i6.UsersRepository(gh<_i5.HttpClient>()),
-          registerFor: {_me},
-        );
-        gh.factory<_i7.UsersRepository>(
-          () => _i8.UserCartRepository(gh<_i5.HttpClient>()),
-          registerFor: {_userMode},
-        );
-        gh.factory<_i9.AuthRepository>(
-            () => _i9.AuthRepository(gh<_i5.HttpClient>()));
-        gh.singleton<_i10.AuthBloc>(_i10.AuthBloc(
-          authRepository: gh<_i7.AuthRepository>(),
-          userRepository: gh<_i7.UsersRepository>(),
+            () => _i6.UsersRepository(gh<_i5.HttpClient>()));
+        gh.factory<_i7.AuthRepository>(
+            () => _i7.AuthRepository(gh<_i5.HttpClient>()));
+        gh.singleton<_i8.AuthBloc>(_i8.AuthBloc(
+          authRepository: gh<_i9.AuthRepository>(),
+          userRepository: gh<_i9.UsersRepository>(),
           featureFlagBloc: gh<_i3.FeatureFlagBloc>(),
         ));
-        gh.factory<_i11.LoginFormBloc>(() => _i11.LoginFormBloc(
-              authBloc: gh<_i12.AuthBloc>(),
-              repository: gh<_i9.AuthRepository>(),
+        gh.factory<_i10.LoginFormBloc>(() => _i10.LoginFormBloc(
+              authBloc: gh<_i11.AuthBloc>(),
+              repository: gh<_i7.AuthRepository>(),
             ));
       },
     );
@@ -76,19 +70,33 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i13.CartsRepository>(
-        () => _i13.CartsRepository(gh<_i5.HttpClient>()));
+    gh.factory<_i12.CartsRepository>(
+      () => _i12.CartsRepository(gh<_i5.HttpClient>()),
+      registerFor: {_me},
+    );
+    gh.factory<_i12.CartsRepository>(
+      () => _i13.UserCartRepository(
+        gh<_i5.HttpClient>(),
+        userId: gh<int>(instanceName: 'userId'),
+      ),
+      registerFor: {_userMode},
+    );
     gh.factory<_i14.ProductsRepository>(
         () => _i14.ProductsRepository(gh<_i5.HttpClient>()));
-    gh.singleton<_i15.UsersBloc>(_i15.UsersBloc(gh<_i7.UsersRepository>()));
-    gh.lazySingleton<_i16.CartsBloc>(
-        () => _i16.CartsBloc(repository: gh<_i13.CartsRepository>()));
+    gh.singleton<_i15.UsersBloc>(_i15.UsersBloc(gh<_i9.UsersRepository>()));
+    gh.singleton<_i16.CartsBloc>(
+      _i16.CartsBloc(repository: gh<_i12.CartsRepository>()),
+      registerFor: {
+        _me,
+        _userMode,
+      },
+    );
     gh.factoryParam<_i17.ProductBloc, int, dynamic>((
       id,
       _,
     ) =>
         _i17.ProductBloc(
-          repository: gh<_i7.ProductsRepository>(),
+          repository: gh<_i9.ProductsRepository>(),
           id: id,
         ));
     gh.lazySingleton<_i18.ProductsBloc>(
@@ -100,8 +108,8 @@ extension GetItInjectableX on _i1.GetIt {
         _i19.CartFormBloc(
           initial: initial,
           cartsBloc: gh<_i16.CartsBloc>(),
-          cartsRepository: gh<_i13.CartsRepository>(),
-          productsRepository: gh<_i7.ProductsRepository>(),
+          cartsRepository: gh<_i12.CartsRepository>(),
+          productsRepository: gh<_i9.ProductsRepository>(),
         ));
     return this;
   }

@@ -4,17 +4,18 @@ import 'package:shop_app/core/extensions/date_time_extension.dart';
 import 'package:shop_app/models/cart/models.dart';
 import 'package:shop_app/services/http/http_client.dart';
 
+@Environment('me')
 @injectable
 class CartsRepository {
   final HttpClient httpClient;
 
   CartsRepository(this.httpClient);
 
-  String get endpoint => '/carts';
+  String get endpointUrl => '/carts';
 
   Future<Cart> createCart(Cart payload) async {
     final response = await httpClient.post(
-      endpoint,
+      endpointUrl,
       data: payload.toJson(),
     );
 
@@ -22,7 +23,7 @@ class CartsRepository {
   }
 
   Future<List<Cart>> getAllCarts() async {
-    final response = await httpClient.get(endpoint);
+    final response = await httpClient.get(endpointUrl);
 
     return (response.data as List)
         .map((jsonCart) => Cart.fromJson(jsonCart))
@@ -30,14 +31,14 @@ class CartsRepository {
   }
 
   Future<List<Cart>> getCartsInDateRange({
-    required DateTime start,
-    required DateTime end,
+    required DateTime? start,
+    required DateTime? end,
   }) async {
     final response = await httpClient.get(
-      endpoint,
+      endpointUrl,
       queryParameters: {
-        'startdate': start.format(),
-        'enddate': end.format(),
+        'startdate': start?.format() ?? '',
+        'enddate': end?.format() ?? '',
       },
     );
 
@@ -48,7 +49,7 @@ class CartsRepository {
 
   Future<Cart> updateCart(Cart payload) async {
     final response = await httpClient.put(
-      '$endpoint/${payload.id}',
+      '$endpointUrl/${payload.id}',
       data: payload.toJson(),
     );
 
