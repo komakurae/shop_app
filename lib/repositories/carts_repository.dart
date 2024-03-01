@@ -18,7 +18,6 @@ class CartsRepository {
       endpointUrl,
       data: payload.toJson(),
     );
-
     return Cart.fromJson(response.data);
   }
 

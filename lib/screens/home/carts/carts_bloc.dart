@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:shop_app/models/cart/models.dart';
 import 'package:shop_app/models/index.dart';
 import 'package:shop_app/repositories/carts_repository.dart';
 
@@ -23,6 +22,16 @@ class CartsBloc
   @override
   Future<List<Cart>> onLoadAsync() {
     return repository.getAllCarts();
+  }
+
+  @override
+  Future<Cart> onAddItemAsync(Cart newItem) {
+    return repository.createCart(newItem);
+  }
+
+  @override
+  Future<Cart> onEditItemAsync(Cart updatedItem) {
+    return repository.updateCart(updatedItem);
   }
 
   @override

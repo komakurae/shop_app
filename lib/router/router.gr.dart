@@ -15,14 +15,15 @@ import 'package:shop_app/screens/auth_screen.dart' as _i1;
 import 'package:shop_app/screens/home/carts/carts_screen.dart' as _i3;
 import 'package:shop_app/screens/home/carts/modals/cart_form_screen.dart'
     as _i2;
-import 'package:shop_app/screens/home/carts/user_carts_screen.dart' as _i11;
+import 'package:shop_app/screens/home/carts/modals/select_user/select_user_screen.dart'
+    as _i10;
 import 'package:shop_app/screens/home/home_screen.dart' as _i4;
 import 'package:shop_app/screens/home/home_wrapper.dart' as _i5;
 import 'package:shop_app/screens/home/products/pages/product_screen.dart'
     as _i7;
 import 'package:shop_app/screens/home/products/products_screen.dart' as _i8;
 import 'package:shop_app/screens/home/products/products_wrapper.dart' as _i9;
-import 'package:shop_app/screens/home/settings/settings_screen.dart' as _i10;
+import 'package:shop_app/screens/home/settings/settings_screen.dart' as _i11;
 import 'package:shop_app/screens/home/users/users_screen.dart' as _i12;
 import 'package:shop_app/screens/login/login_screen.dart' as _i6;
 
@@ -98,16 +99,16 @@ abstract class $AppRouter extends _i13.RootStackRouter {
         child: const _i9.ProductsWrapper(),
       );
     },
+    SelectUserRoute.name: (routeData) {
+      return _i13.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i13.WrappedRoute(child: const _i10.SelectUserScreen()),
+      );
+    },
     SettingsRoute.name: (routeData) {
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.SettingsScreen(),
-      );
-    },
-    UserCartsRoute.name: (routeData) {
-      return _i13.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i13.WrappedRoute(child: const _i11.UserCartsScreen()),
+        child: const _i11.SettingsScreen(),
       );
     },
     UsersRoute.name: (routeData) {
@@ -295,7 +296,21 @@ class ProductsRouter extends _i13.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i10.SettingsScreen]
+/// [_i10.SelectUserScreen]
+class SelectUserRoute extends _i13.PageRouteInfo<void> {
+  const SelectUserRoute({List<_i13.PageRouteInfo>? children})
+      : super(
+          SelectUserRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SelectUserRoute';
+
+  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i11.SettingsScreen]
 class SettingsRoute extends _i13.PageRouteInfo<void> {
   const SettingsRoute({List<_i13.PageRouteInfo>? children})
       : super(
@@ -304,20 +319,6 @@ class SettingsRoute extends _i13.PageRouteInfo<void> {
         );
 
   static const String name = 'SettingsRoute';
-
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i11.UserCartsScreen]
-class UserCartsRoute extends _i13.PageRouteInfo<void> {
-  const UserCartsRoute({List<_i13.PageRouteInfo>? children})
-      : super(
-          UserCartsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'UserCartsRoute';
 
   static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
 }

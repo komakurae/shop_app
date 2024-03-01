@@ -42,7 +42,12 @@ class AppRouter extends $AppRouter {
                 AutoRoute(page: SettingsRoute.page),
               ],
             ),
-            AutoRoute(page: CartsFormRoute.page),
+            AutoRoute(
+              page: CartsFormRoute.page,
+            ),
+            AutoRoute(
+              page: SelectUserRoute.page,
+            ),
             AutoRoute(page: UserCartsRoute.page),
           ],
         ),
