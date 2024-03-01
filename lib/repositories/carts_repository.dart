@@ -17,7 +17,6 @@ class CartsRepository {
       endpoint,
       data: payload.toJson(),
     );
-
     return Cart.fromJson(response.data);
   }
 

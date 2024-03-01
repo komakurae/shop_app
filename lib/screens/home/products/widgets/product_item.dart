@@ -22,7 +22,7 @@ class ProductItem extends StatelessWidget {
         Positioned.fill(
           child: GestureDetector(
             onTap: () {
-              context.router.push(
+              context.pushRoute(
                 ProductRoute(productId: product.id),
               );
             },

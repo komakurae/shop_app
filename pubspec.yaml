@@ -69,6 +69,9 @@ dependencies:
     sdk: flutter
   cached_network_image: ^3.3.0
   flutter_layout_grid: ^2.0.5
+  another_flushbar: ^1.12.30
+
+
   tuple: ^2.0.2
 
   #feature flag
