@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:injectable/injectable.dart';
 
 import 'package:shop_app/models/index.dart';
 import 'package:shop_app/repositories/carts_repository.dart';
+import 'package:shop_app/repositories/users_carts_repository.dart';
+import 'package:shop_app/services/index.dart';
 
 typedef CartsState = NetworkFilterableState<List<Cart>, DateTimeRange>;
 
-@lazySingleton
+@Singleton(env: ['me', 'userMode'])
 class CartsBloc
     extends NetworkFilterableListBloc<Cart, DateTimeRange, CartsState> {
   CartsBloc({required this.repository})
@@ -36,8 +37,25 @@ class CartsBloc
   }
 
   @override
+  CartsState onStateChanged(DataChangeReason reason, CartsState state) {
+    if (getIt<CartsRepository>() is UserCartRepository) {
+      var visibleData = state.data;
+
+      visibleData = visibleData
+          .where((element) =>
+              element.userId ==
+              (getIt<CartsRepository>() as UserCartRepository).userId)
+          .toList();
+    }
+    return super.onStateChanged(reason, state);
+  }
+
+  @override
   Future<List<Cart>> onFilterAsync(DateTimeRange filter) {
-    return repository.getCartsInDateRange(start: filter.start, end: filter.end);
+    return repository.getCartsInDateRange(
+      start: filter.start,
+      end: filter.end,
+    );
   }
 
   @override

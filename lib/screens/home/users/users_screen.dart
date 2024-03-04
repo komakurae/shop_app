@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shop_app/router/index.dart';
 import 'package:shop_app/screens/home/users/users_bloc.dart';
+import 'package:shop_app/services/index.dart';
 
 @RoutePage()
 class UsersScreen extends StatelessWidget implements AutoRouteWrapper {
@@ -69,7 +70,22 @@ class UsersScreen extends StatelessWidget implements AutoRouteWrapper {
                 sliver: SliverList.builder(
                   itemCount: users.length,
                   itemBuilder: (context, index) {
-                    return Text(users[index].username);
+                    return GestureDetector(
+                      onTap: () async {
+                        getIt.pushNewScope(
+                          init: (getIt) {
+                            configureUserModeDependencies(users[index]);
+                          },
+                        );
+
+                        await context.router.push(
+                          const UserCartsRoute(),
+                        );
+
+                        await getIt.popScope();
+                      },
+                      child: Text(users[index].username),
+                    );
                   },
                 ),
               );
