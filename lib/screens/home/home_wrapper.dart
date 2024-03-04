@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shop_app/blocs/index.dart';
 import 'package:shop_app/router/index.dart';
@@ -19,8 +20,9 @@ class _HomeWrapperScreenState extends State<HomeWrapperScreen> {
     super.initState();
 
     getIt.pushNewScope(
-      init: (getIt) async =>
-          configureUserDependencies(getIt<AuthBloc>().state.userProfile),
+      init: (getIt) async => configureUserDependencies(
+        context.read<AuthBloc>().state.userProfile,
+      ),
     );
   }
 
